@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>VisionX — Premium Digital Marketing & AI Agency</title>
+  <meta name="description" content="VisionX is a premium data-driven digital marketing agency specializing in AI growth automation, SEO, Meta Ads, and web dev. Scale your revenue 10x faster.">
+  <meta name="keywords" content="digital marketing agency, AI marketing, SEO agency, Meta Ads, Google Ads, ROAS optimization">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="VisionX — Premium Digital Marketing & AI Agency">
+  <meta property="og:description" content="Scale your business with AI-powered marketing strategies. Proven ROI. Real results.">
+  <meta property="og:type" content="website">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Background Canvas and Blobs -->
+  <canvas id="canvas-backdrop"></canvas>
+  <div class="blob-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Header / Navigation Bar -->
+  <header class="navbar" id="header-nav">
+    <div class="nav-container">
+      <a href="#home" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-zap"></i></div>
+        VisionX
+      </a>
+      
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-menu">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#results" class="nav-link">Results</a>
+        <a href="#why-us" class="nav-link">Why Us</a>
+        <a href="#testimonials" class="nav-link">Testimonials</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-primary btn-sm">Book Strategy Call</a>
+        <button class="mobile-toggle" id="mobile-drawer-toggle" aria-label="Toggle Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-drawer" id="mobile-drawer" style="position: fixed; top: 0; right: -300px; width: 300px; height: 100vh; background: rgba(10, 10, 18, 0.98); border-left: 1px solid var(--border-color); backdrop-filter: blur(20px); z-index: 99; display: flex; flex-direction: column; padding: 100px 30px; gap: 20px; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
+    <a href="#home" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Home</a>
+    <a href="#services" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Services</a>
+    <a href="#results" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Results</a>
+    <a href="#why-us" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Why Us</a>
+    <a href="#testimonials" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Testimonials</a>
+    <a href="#pricing" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Pricing</a>
+    <a href="#contact" class="btn btn-primary" style="margin-top: 30px;">Book Strategy Call</a>
+  </div>
+  <style>
+    .mobile-drawer.open {
+      right: 0 !important;
+    }
+  </style>
+
+  <main>
+    <!-- 1. Hero Section -->
+    <section class="section hero-section" id="home">
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <div class="badge"><span class="status-dot"></span> AI-Powered Growth Agency · Est. 2019</div>
+          <h1 class="hero-title">We Scale Brands<br>10x Faster With<br><span class="text-gradient">AI Marketing</span></h1>
+          <p class="hero-desc">Your premium data-driven growth partner. We build and deploy long-tail SEO, high-performing Meta Ads, Google Ads, and custom AI automations that translate directly to revenue.</p>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary">Book Strategy Call <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#results" class="btn btn-secondary"><i class="fa-solid fa-play"></i> View Case Studies</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h3>200+</h3>
+              <p>Clients Served</p>
+            </div>
+            <div class="stat-item">
+              <h3>$50M+</h3>
+              <p>Revenue Generated</p>
+            </div>
+            <div class="stat-item">
+              <h3>8.4x</h3>
+              <p>Avg. ROAS</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" style="transition-delay: 200ms;">
+          <div class="hero-visual-glow"></div>
+          
+          <!-- Interactive Dashboard Mockup Card -->
+          <div class="dashboard-mockup">
+            <div class="mockup-header">
+              <div class="mockup-dots">
+                <span class="mockup-dot mockup-dot-red"></span>
+                <span class="mockup-dot mockup-dot-yellow"></span>
+                <span class="mockup-dot mockup-dot-green"></span>
+              </div>
+              <div class="mockup-title"><i class="fa-solid fa-chart-line"></i> Campaign Dashboard</div>
+              <div class="badge badge-emerald" style="margin-bottom: 0; padding: 2px 10px; font-size: 10px;"><span class="status-dot"></span> Live</div>
+            </div>
+            <div class="mockup-grid">
+              <div class="mockup-stat">
+                <div class="mockup-stat-icon" style="color: var(--accent-cyan);"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                <div class="mockup-stat-val" data-target="340" data-suffix="%">+0%</div>
+                <div class="mockup-stat-lbl">Revenue Growth</div>
+              </div>
+              <div class="mockup-stat">
+                <div class="mockup-stat-icon" style="color: var(--accent-pink);"><i class="fa-solid fa-dollar-sign"></i></div>
+                <div class="mockup-stat-val" data-target="8.4" data-suffix="x">0.0x</div>
+                <div class="mockup-stat-lbl">Average ROAS</div>
+              </div>
+              <div class="mockup-stat">
+                <div class="mockup-stat-icon" style="color: var(--accent-violet);"><i class="fa-solid fa-bolt"></i></div>
+                <div class="mockup-stat-val" data-target="280" data-suffix="%">+0%</div>
+                <div class="mockup-stat-lbl">Conversions</div>
+              </div>
+              <div class="mockup-stat">
+                <div class="mockup-stat-icon" style="color: var(--accent-blue);"><i class="fa-solid fa-users"></i></div>
+                <div class="mockup-stat-val" data-target="2.1" data-suffix="M">0.0M</div>
+                <div class="mockup-stat-lbl">Monthly Reach</div>
+              </div>
+              <div class="mockup-chart">
+                <div class="mockup-chart-header">
+                  <span>Revenue Trend</span>
+                  <span style="color: var(--accent-emerald);">+340% YoY</span>
+                </div>
+                <div class="mockup-bars">
+                  <div class="mockup-bar" data-height="25%" style="height: 0px;"></div>
+                  <div class="mockup-bar" data-height="35%" style="height: 0px;"></div>
+                  <div class="mockup-bar" data-height="30%" style="height: 0px;"></div>
+                  <div class="mockup-bar" data-height="55%" style="height: 0px;"></div>
+                  <div class="mockup-bar" data-height="45%" style="height: 0px;"></div>
+                  <div class="mockup-bar" data-height="65%" style="height: 0px;"></div>
+                  <div class="mockup-bar" data-height="85%" style="height: 0px; background: var(--gradient-primary);"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Services Section -->
+    <section class="section reveal" id="services">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge badge-cyan">Our Capabilities</div>
+          <h2 class="section-title">Explore Our Service<br><span class="text-gradient-cyan">Categories</span></h2>
+          <p class="section-desc">We offer end-to-end solutions across 11 key technology and creative pillars. Click a category card to see the full list of individual services, starting prices, and custom configurations.</p>
+        </div>
+
+        <div class="card-grid">
+          <!-- Category 1 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.15); color: var(--accent-emerald);"><i class="fa-solid fa-robot"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">AI Solutions</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Automations, smart chatbots, content generation pipelines, custom API workflows, and system integrations.</p>
+              </div>
+              <a href="ai-solutions.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore AI Services →</a>
+            </div>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.15); color: var(--accent-blue);"><i class="fa-solid fa-video"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Video &amp; Animation</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Short/long-form editing, motion graphics, corporate media, SaaS ads, 2D/3D animations, and cinematic production.</p>
+              </div>
+              <a href="video-production.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Video Services →</a>
+            </div>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(255, 0, 229, 0.08); border: 1px solid rgba(255, 0, 229, 0.15); color: var(--accent-pink);"><i class="fa-solid fa-palette"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Creative Design</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Premium logos, brand identity guides, packaging design, infographics, business cards, and social assets.</p>
+              </div>
+              <a href="graphic-design.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Design Services →</a>
+            </div>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.15); color: var(--accent-violet);"><i class="fa-solid fa-camera-retro"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Photo Services</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Professional retouching, image enhancements, background removal, photo manipulations, and AI image synthesis.</p>
+              </div>
+              <a href="photo-services.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Photo Services →</a>
+            </div>
+          </div>
+
+          <!-- Category 5 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.15); color: var(--accent-cyan);"><i class="fa-solid fa-chart-line"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Digital Marketing</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Meta Ads, Google Ads scaling, SEO search optimization, performance metrics, and growth audit roadmaps.</p>
+              </div>
+              <a href="digital-marketing.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Marketing →</a>
+            </div>
+          </div>
+
+          <!-- Category 6 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.15); color: var(--accent-blue);"><i class="fa-solid fa-globe"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Social Media Handling</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Complete SMM account handling, content calendars, community management, optimization and analytics.</p>
+              </div>
+              <a href="social-media-management.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore SMM Services →</a>
+            </div>
+          </div>
+
+          <!-- Category 7 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.15); color: var(--accent-cyan);"><i class="fa-solid fa-laptop-code"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Web &amp; App Development</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Corporate sites, landing design, dashboards, custom web apps, and SaaS platforms (Standard/Advanced).</p>
+              </div>
+              <a href="web-app-development.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Development →</a>
+            </div>
+          </div>
+
+          <!-- Category 8 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(255, 0, 229, 0.08); border: 1px solid rgba(255, 0, 229, 0.15); color: var(--accent-pink);"><i class="fa-solid fa-compass-drafting"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">UI/UX Design</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Website UI frameworks, app UI wireframes, clickable high-fidelity prototypes, and user journey audits.</p>
+              </div>
+              <a href="ui-ux-design.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore UI/UX Design →</a>
+            </div>
+          </div>
+
+          <!-- Category 9 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.15); color: var(--accent-violet);"><i class="fa-solid fa-cubes"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Software Solutions</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Frontend/backend architecture, API development, custom scripting, bug patching, and databases.</p>
+              </div>
+              <a href="software-coding-solutions.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Code Solutions →</a>
+            </div>
+          </div>
+
+          <!-- Category 10 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.15); color: var(--accent-emerald);"><i class="fa-solid fa-sliders"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Technology Solutions</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Cloud server architectures, workflow audits, IT strategy, and business-wide digital transformations.</p>
+              </div>
+              <a href="technology-solutions.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Tech Solutions →</a>
+            </div>
+          </div>
+
+          <!-- Category 11 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); color: #94a3b8;"><i class="fa-solid fa-folder-open"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Additional Retainers</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Consultations, corporate branding adjustments, pitch deck formatting, and NFT digital artworks.</p>
+              </div>
+              <a href="additional-services.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Additional →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Results / Case Studies Section -->
+    <section class="section reveal" id="results">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge badge-emerald">Results Showcase</div>
+          <h2 class="section-title">Proven Trajectories.<br><span class="text-gradient">Measurable ROAS.</span></h2>
+          <p class="section-desc">Actual numbers from live audits and active retainer setups we manage for fast-scaling brands globally.</p>
+        </div>
+
+        <div class="results-grid">
+          <!-- Case 1 -->
+          <div class="glass-card result-card">
+            <div class="result-header">
+              <div class="result-meta">
+                <span class="result-category">Meta Ads + SEO</span>
+                <h3 class="result-title">E-Commerce Fashion</h3>
+                <span class="result-industry">Apparel Retailer</span>
+              </div>
+              <div class="result-badge-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+            </div>
+            <div class="result-chart">
+              <span class="result-chart-lbl">Revenue Lift (Monthly)</span>
+              <div class="result-bars-container">
+                <div class="result-bar-item">
+                  <div class="result-bar-fill" data-height="20%"></div>
+                  <span class="result-bar-lbl">Before</span>
+                </div>
+                <div class="result-bar-item">
+                  <div class="result-bar-fill" data-height="95%"></div>
+                  <span class="result-bar-lbl">After</span>
+                </div>
+              </div>
+            </div>
+            <div class="result-metrics">
+              <div class="metric-box">
+                <div class="metric-lbl">Revenue</div>
+                <div class="metric-vals">
+                  <span class="metric-old">$45K</span>
+                  <span class="metric-new" style="color: var(--accent-cyan);">$340K</span>
+                </div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-lbl">ROAS Scale</div>
+                <div class="metric-vals">
+                  <span class="metric-old">1.8x</span>
+                  <span class="metric-new" style="color: var(--accent-cyan);">9.2x</span>
+                </div>
+              </div>
+            </div>
+            <p class="result-summary">Restructured campaign scaling blueprints, built custom high-conversion E-commerce catalog pages, and optimized search footprints for targeted phrases.</p>
+            <div class="result-footer">
+              <span class="result-time">Achieved in <span>6 Months</span></span>
+              <a href="#contact" class="result-link">Book Free Call <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+          </div>
+
+          <!-- Case 2 -->
+          <div class="glass-card result-card">
+            <div class="result-header">
+              <div class="result-meta">
+                <span class="result-category" style="color: var(--accent-violet);">Google Ads + Content</span>
+                <h3 class="result-title">B2B SaaS Platform</h3>
+                <span class="result-industry">Tech Operations</span>
+              </div>
+              <div class="result-badge-icon" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.2); color: var(--accent-violet);"><i class="fa-solid fa-server"></i></div>
+            </div>
+            <div class="result-chart">
+              <span class="result-chart-lbl">MRR Growth Trend</span>
+              <div class="result-bars-container">
+                <div class="result-bar-item">
+                  <div class="result-bar-fill" data-height="15%"></div>
+                  <span class="result-bar-lbl">Before</span>
+                </div>
+                <div class="result-bar-item">
+                  <div class="result-bar-fill" data-height="85%" style="background: var(--gradient-violet-pink);"></div>
+                  <span class="result-bar-lbl">After</span>
+                </div>
+              </div>
+            </div>
+            <div class="results-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+              <div class="metric-box">
+                <div class="metric-lbl">MRR Status</div>
+                <div class="metric-vals">
+                  <span class="metric-old">$12K</span>
+                  <span class="metric-new" style="color: var(--accent-violet);">$89K</span>
+                </div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-lbl">Funnel ROAS</div>
+                <div class="metric-vals">
+                  <span class="metric-old">2.1x</span>
+                  <span class="metric-new" style="color: var(--accent-violet);">7.4x</span>
+                </div>
+              </div>
+            </div>
+            <p class="result-summary">Developed landing comparison setups, built strategic content assets that generated ranking terms, and configured programmatic Google Ads targeting.</p>
+            <div class="result-footer">
+              <span class="result-time">Achieved in <span>8 Months</span></span>
+              <a href="#contact" class="result-link" style="color: var(--accent-violet);">Book Free Call <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+          </div>
+
+          <!-- Case 3 -->
+          <div class="glass-card result-card">
+            <div class="result-header">
+              <div class="result-meta">
+                <span class="result-category" style="color: var(--accent-pink);">Social Media + Ads</span>
+                <h3 class="result-title">Resto Chain Brand</h3>
+                <span class="result-industry">Food & Hospitality</span>
+              </div>
+              <div class="result-badge-icon" style="background: rgba(255, 0, 229, 0.1); border-color: rgba(255, 0, 229, 0.2); color: var(--accent-pink);"><i class="fa-solid fa-store"></i></div>
+            </div>
+            <div class="result-chart">
+              <span class="result-chart-lbl">Store Traffic Increase</span>
+              <div class="result-bars-container">
+                <div class="result-bar-item">
+                  <div class="result-bar-fill" data-height="25%"></div>
+                  <span class="result-bar-lbl">Before</span>
+                </div>
+                <div class="result-bar-item">
+                  <div class="result-bar-fill" data-height="100%" style="background: var(--gradient-violet-pink);"></div>
+                  <span class="result-bar-lbl">After</span>
+                </div>
+              </div>
+            </div>
+            <div class="result-metrics">
+              <div class="metric-box">
+                <div class="metric-lbl">Revenue</div>
+                <div class="metric-vals">
+                  <span class="metric-old">$30K</span>
+                  <span class="metric-new" style="color: var(--accent-pink);">$210K</span>
+                </div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-lbl">Total ROAS</div>
+                <div class="metric-vals">
+                  <span class="metric-old">N/A</span>
+                  <span class="metric-new" style="color: var(--accent-pink);">12.0x</span>
+                </div>
+              </div>
+            </div>
+            <p class="result-summary">Developed short-form video strategies, created localized Facebook/Instagram ad sets, and built a custom loyalty capture tool that increased local recurring sales.</p>
+            <div class="result-footer">
+              <span class="result-time">Achieved in <span>5 Months</span></span>
+              <a href="#contact" class="result-link" style="color: var(--accent-pink);">Book Free Call <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Why Us Section -->
+    <section class="section reveal" id="why-us">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge">The VisionX Model</div>
+          <h2 class="section-title">The Growth Agency Built<br><span class="text-gradient">Differently</span></h2>
+          <p class="section-desc">We cut the typical agency bloat. We prioritize results and transparent communication over slides and presentations.</p>
+        </div>
+
+        <div class="why-grid">
+          <!-- Pillar 1 -->
+          <div class="glass-card why-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content">
+              <div class="why-icon" style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.15); color: var(--accent-violet);"><i class="fa-solid fa-brain"></i></div>
+              <h3 class="why-title">AI-Powered Strategy</h3>
+              <p class="why-desc">We use custom artificial intelligence models to audit competitor search footprints, formulate ad variations, and construct targeted marketing plans.</p>
+            </div>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="glass-card why-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content">
+              <div class="why-icon" style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.15); color: var(--accent-cyan);"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+              <h3 class="why-title">Data-Driven Choices</h3>
+              <p class="why-desc">We verify ad copy variations and landing structures with real conversion metrics. We track over 50 data variables to guide optimization.</p>
+            </div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="glass-card why-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content">
+              <div class="why-icon" style="background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.15); color: var(--accent-emerald);"><i class="fa-solid fa-bolt"></i></div>
+              <h3 class="why-title">Rapid Build Cycles</h3>
+              <p class="why-desc">We set up funnels, write copy, and launch responsive pages quickly, enabling us to gather real customer feedback weeks before traditional agencies.</p>
+            </div>
+          </div>
+
+          <!-- Pillar 4 -->
+          <div class="glass-card why-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content">
+              <div class="why-icon" style="background: rgba(255, 0, 229, 0.08); border: 1px solid rgba(255, 0, 229, 0.15); color: var(--accent-pink);"><i class="fa-solid fa-shield-halved"></i></div>
+              <h3 class="why-title">Transparent Pipelines</h3>
+              <p class="why-desc">No black-box metrics. You get shared Slack channel access, real-time reports, and direct contact with the project engineers working on your account.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-banner">
+          <div class="cta-banner-content">
+            <h3 class="cta-banner-title">Ready to scale your business <span class="text-gradient-cyan">10x faster?</span></h3>
+            <p class="cta-banner-desc">Get a comprehensive digital strategy roadmap built for your specific product vertical. Entirely free.</p>
+          </div>
+          <div class="cta-banner-btn">
+            <a href="#contact" class="btn btn-primary">Book Strategy Call</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Testimonials Section -->
+    <section class="section reveal" id="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge badge-pink">Client Testimonials</div>
+          <h2 class="section-title">What Our Partners<br><span class="text-gradient-cyan">Say About Us</span></h2>
+        </div>
+
+        <div class="testimonial-container">
+          <div class="testimonial-slider">
+            <div class="testimonial-track" id="testimonial-track">
+              <!-- Slide 1 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="testimonial-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+                  <div class="testimonial-badge">✦ 7.5x revenue in 6 months</div>
+                  <p class="testimonial-text">"VisionX completely transformed our digital presence. Within 6 months, our revenue went from $45K to $340K per month. The AI-driven Meta Ads strategy they built for us is nothing short of genius. The team is responsive, data-obsessed, and genuinely cares about our growth."</p>
+                  <div class="testimonial-author">
+                    <div class="author-info">
+                      <div class="author-avatar">SM</div>
+                      <div>
+                        <div class="author-name">Sarah Mitchell</div>
+                        <div class="author-role">CEO, Luminary Fashion</div>
+                      </div>
+                    </div>
+                    <div class="author-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="testimonial-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+                  <div class="testimonial-badge">✦ 7.4x ROAS on B2B campaigns</div>
+                  <p class="testimonial-text">"The structured landing page test variants and long-tail SEO content built by VisionX scaled our qualified pipeline beyond expectations. We went from $12K to $89K in MRR inside 8 months. Their level of reporting and transparency is unmatched."</p>
+                  <div class="testimonial-author">
+                    <div class="author-info">
+                      <div class="author-avatar">DK</div>
+                      <div>
+                        <div class="author-name">David Kovacs</div>
+                        <div class="author-role">Co-Founder, Synthetix Ops</div>
+                      </div>
+                    </div>
+                    <div class="author-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="testimonial-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+                  <div class="testimonial-badge">✦ Local sales grew 7x</div>
+                  <p class="testimonial-text">"Creating localized social video systems and ad sets for our store branches immediately filled our seats. Deploying the customer loyalty database tool kept guests returning. We grew our locations' monthly intake from $30K to $210K."</p>
+                  <div class="testimonial-author">
+                    <div class="author-info">
+                      <div class="author-avatar">MC</div>
+                      <div>
+                        <div class="author-name">Marco Castella</div>
+                        <div class="author-role">Operations Director, Castella Group</div>
+                      </div>
+                    </div>
+                    <div class="author-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slider-controls">
+            <div class="slider-dots">
+              <button class="slider-dot active" aria-label="Slide 1"></button>
+              <button class="slider-dot" aria-label="Slide 2"></button>
+              <button class="slider-dot" aria-label="Slide 3"></button>
+            </div>
+            <div class="slider-arrows">
+              <button class="slider-arrow" id="prev-testimonial" aria-label="Previous Testimonial"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="slider-arrow" id="next-testimonial" aria-label="Next Testimonial"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Interactive ROI Calculator Section (Pricing) -->
+    <section class="section reveal" id="pricing">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge badge-cyan">Pricing Simulator</div>
+          <h2 class="section-title">Estimate Your Retainer<br>&amp; <span class="text-gradient">ROI Growth</span></h2>
+          <p class="section-desc">Adjust the variables below to inspect typical monthly growth plan retainers, or select individual items from our catalog to see a custom quote invoice.</p>
+        </div>
+
+        <div class="calculator-card" style="display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px;">
+          <div class="calc-inputs" style="display: flex; flex-direction: column; gap: 24px;">
+            <!-- Tabs Selector -->
+            <div class="calc-tabs" style="display: flex; gap: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+              <button type="button" class="filter-btn active" id="calc-tab-retainer-btn" style="border-radius: 12px;">Monthly Retainer Plan</button>
+              <button type="button" class="filter-btn" id="calc-tab-invoice-btn" style="border-radius: 12px; display: inline-flex; align-items: center; gap: 8px;">
+                Custom Invoice Builder 
+                <span id="selected-count-badge" class="badge badge-pink" style="margin-bottom:0; display: none; padding: 2px 8px; font-size: 10px; font-weight: 700;">0</span>
+              </button>
+            </div>
+
+            <!-- Tab 1 Content: Monthly Retainer -->
+            <div id="calc-retainer-inputs" class="calc-input-section" style="display: flex; flex-direction: column; gap: 32px;">
+              <div class="calc-group">
+                <div class="calc-label-row">
+                  <span class="calc-lbl">Monthly Retainer Budget</span>
+                  <span class="calc-val" id="budget-value">₹50,000</span>
+                </div>
+                <input type="range" min="10000" max="500000" step="5000" value="75000" class="range-slider" id="budget-slider">
+              </div>
+
+              <div class="calc-group">
+                <span class="calc-lbl">Select Target Channels</span>
+                <div class="calc-channels" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+                  <div class="channel-btn active" data-multiplier="0.3">
+                    <div class="channel-checkbox"><i class="fa-solid fa-check"></i></div>
+                    <span>SEO &amp; Content Marketing</span>
+                  </div>
+                  <div class="channel-btn active" data-multiplier="0.5">
+                    <div class="channel-checkbox"><i class="fa-solid fa-check"></i></div>
+                    <span>Meta Paid Ads Scaling</span>
+                  </div>
+                  <div class="channel-btn" data-multiplier="0.4">
+                    <div class="channel-checkbox"><i class="fa-solid fa-check"></i></div>
+                    <span>Google Ads &amp; Campaigns</span>
+                  </div>
+                  <div class="channel-btn" data-multiplier="0.2">
+                    <div class="channel-checkbox"><i class="fa-solid fa-check"></i></div>
+                    <span>AI Operations Automation</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 2 Content: Invoice Builder -->
+            <div id="calc-invoice-inputs" class="calc-input-section" style="display: none; flex-direction: column; gap: 20px;">
+              <span class="calc-lbl">Custom Selected Services</span>
+              <div id="invoice-items-list" style="display: flex; flex-direction: column; gap: 10px; max-height: 250px; overflow-y: auto; padding-right: 8px;">
+                <p style="font-size: 13px; color: #64748b; text-align: center; padding: 20px 0;">No services selected. Click "Add to Calculator" on any service card above to build your custom invoice.</p>
+              </div>
+              <p style="font-size: 11px; color: #64748b; text-align: center;">You can select or deselect items directly in the catalog above.</p>
+            </div>
+          </div>
+
+          <div class="calc-outputs">
+            <div class="calc-out-header">
+              <div class="calc-out-lbl" id="calc-tier-lbl">Retainer Tier</div>
+              <div class="calc-out-val" id="calc-out-plan" style="color: var(--accent-cyan); font-size: 24px; margin-bottom: 12px;">Growth Retainer</div>
+              <div class="calc-out-lbl" id="calc-price-lbl">Estimated Retainer Cost</div>
+              <div class="calc-out-val" id="calc-out-price">₹75,000/mo</div>
+            </div>
+
+            <div class="calc-metrics-row">
+              <div class="calc-metric-box">
+                <div class="calc-metric-lbl" id="calc-roi-lbl">Expected ROAS</div>
+                <div class="calc-metric-val" id="calc-out-roi">4.8x</div>
+              </div>
+              <div class="calc-metric-box">
+                <div class="calc-metric-lbl" id="calc-revenue-lbl">Estimated Added Value</div>
+                <div class="calc-metric-val" id="calc-out-revenue">₹3,60,000/mo</div>
+              </div>
+            </div>
+
+            <div class="calc-features-list" id="calc-features">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Contact & Booking Section -->
+    <section class="section reveal" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge badge-emerald">Let's Talk Growth</div>
+          <h2 class="section-title">Schedule A Free<br><span class="text-gradient">Strategy Call</span></h2>
+          <p class="section-desc">Select a date on our live schedule planner and fill out your information to secure a free 30-minute campaign audit call.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info-col">
+            <div class="contact-info-card">
+              <div class="info-item">
+                <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                <div>
+                  <span class="info-lbl">Phone</span>
+                  <div class="info-val">+1 (555) 000-0000</div>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div>
+                  <span class="info-lbl">Email</span>
+                  <div class="info-val">hello@visionx.agency</div>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div>
+                  <span class="info-lbl">Locations</span>
+                  <div class="info-val">New York · London · Dubai</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Date Selector -->
+            <div class="scheduler-widget">
+              <div class="scheduler-title"><i class="fa-solid fa-calendar-days"></i> Select Call Date</div>
+              <div class="calendar-grid" id="calendar-grid">
+                <!-- Populated via JS -->
+              </div>
+              <div class="scheduler-title"><i class="fa-solid fa-clock"></i> Available Times</div>
+              <div class="time-slots" id="time-slots">
+                <p style="grid-column: span 3; font-size: 12px; color: #64748b; text-align: center; padding: 10px 0;">Please select a date first.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <form class="contact-form" id="contact-form-widget">
+              <!-- Hidden inputs to bind date/time choices -->
+              <input type="hidden" id="booking-date-hidden" required>
+              <input type="hidden" id="booking-time-hidden" required>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="form-name">Full Name</label>
+                  <input type="text" class="form-input" id="form-name" required placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="form-email">Email Address</label>
+                  <input type="email" class="form-input" id="form-email" required placeholder="john@company.com">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="form-company">Company</label>
+                <input type="text" class="form-input" id="form-company" required placeholder="Your Company Name">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="form-service">Required Service</label>
+                <select class="form-input form-select" id="form-service" required>
+                  <option value="" disabled selected>Select a service...</option>
+                  <option value="seo">SEO &amp; Content</option>
+                  <option value="meta">Meta Ads Scaling</option>
+                  <option value="google">Google Ads Campaigns</option>
+                  <option value="web">Web Design &amp; Dev</option>
+                  <option value="ai">AI Operations Automation</option>
+                  <option value="full">Full-Stack Growth Retainer</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="form-goals">Describe Your Goals</label>
+                <textarea class="form-input form-textarea" id="form-goals" required placeholder="Tell us about your product, your current marketing hurdles, and what success looks like in 6 months."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="form-submit-btn">Book My Free Strategy Call <i class="fa-solid fa-calendar-check"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#home" class="logo">
+            <div class="logo-icon"><i class="fa-solid fa-zap"></i></div>
+            VisionX
+          </a>
+          <p class="footer-desc">AI-powered digital marketing agency scaling brands 10x faster with data-proven growth funnels.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Services</h4>
+          <ul class="footer-links">
+            <li><a href="#services" class="footer-link">SEO &amp; Content</a></li>
+            <li><a href="#services" class="footer-link">Meta Ads Funnels</a></li>
+            <li><a href="#services" class="footer-link">Google Ads Ads</a></li>
+            <li><a href="#services" class="footer-link">UX/UI Application</a></li>
+            <li><a href="#services" class="footer-link">AI Automation</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#why-us" class="footer-link">Why VisionX</a></li>
+            <li><a href="#results" class="footer-link">Case Studies</a></li>
+            <li><a href="#testimonials" class="footer-link">Testimonials</a></li>
+            <li><a href="#contact" class="footer-link">Schedule Call</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Free SEO Audit</a></li>
+            <li><a href="#" class="footer-link">ROAS Calculator</a></li>
+            <li><a href="#" class="footer-link">Growth Playbook</a></li>
+            <li><a href="#" class="footer-link">Partner Program</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Legal</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+            <li><a href="#" class="footer-link">Terms of Service</a></li>
+            <li><a href="#" class="footer-link">Cookie Settings</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 VisionX Agency. All rights reserved.</p>
+        <div class="system-status">
+          <span class="status-dot"></span> All systems operational
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
