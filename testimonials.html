@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <title>Client Testimonials — Kinetic Growth</title>
   <meta name="description" content="Read feedback from founders and executives scaling with Kinetic Growth.">
-  <link rel="stylesheet" href="style.css?v=3.0">
+  <link rel="stylesheet" href="style.css?v=4.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="assets/logo-icon.png">
 </head>
@@ -20,35 +20,25 @@
 
   
   <!-- Header / Navigation Bar with 3-Dot Menu -->
+  <!-- Header / Navigation Bar with 3-Dot Menu -->
   <header class="navbar" id="header-nav">
     <div class="nav-container">
       <a href="index.html" class="logo">
         <img src="assets/logo-icon.png" alt="Kinetic Growth Logo" class="logo-img">
         Kinetic <b>Growth</b>
       </a>
-      
-      <!-- Desktop Direct Links -->
-      <nav class="nav-menu">
-        <a href="index.html" class="nav-link ">Home</a>
-        <a href="services.html" class="nav-link ">Services</a>
-        <a href="results.html" class="nav-link ">Results</a>
-        <a href="why-us.html" class="nav-link ">Why Us</a>
-        <a href="testimonials.html" class="nav-link active">Testimonials</a>
-        <a href="pricing.html" class="nav-link ">Pricing</a>
-        <a href="contact.html" class="nav-link ">Contact</a>
-      </nav>
 
       <div class="nav-actions">
-        <!-- 3-Dot Menu Button -->
-        <button class="three-dots-btn" id="three-dots-toggle" aria-label="Open Options Menu" title="Menu Options">
+        <!-- 3-Dot Menu Options Button -->
+        <button class="three-dots-btn" id="three-dots-toggle" aria-label="Open Navigation Options" title="Menu Options">
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
-        <a href="contact.html" class="btn btn-primary btn-sm desktop-btn-only">Start a Project</a>
+        <a href="contact.html" class="btn btn-primary btn-sm">Start a Project</a>
       </div>
     </div>
   </header>
 
-  <!-- 3-Dot Menu Overlay & Dropdown Drawer -->
+  <!-- 3-Dot Accordion Menu Overlay & Drawer -->
   <div class="three-dots-menu-drawer" id="three-dots-drawer">
     <div class="menu-drawer-header">
       <div class="menu-title"><i class="fa-solid fa-compass"></i> Navigation Options</div>
@@ -56,26 +46,62 @@
     </div>
     
     <div class="menu-drawer-links">
-      <a href="index.html" class="menu-item "><i class="fa-solid fa-house"></i> Home</a>
-      <a href="services.html" class="menu-item "><i class="fa-solid fa-cubes"></i> Services & Capabilities</a>
-      <a href="results.html" class="menu-item "><i class="fa-solid fa-chart-line"></i> Results & Case Studies</a>
-      <a href="why-us.html" class="menu-item "><i class="fa-solid fa-shield-halved"></i> Why Us / Our Model</a>
-      <a href="testimonials.html" class="menu-item active"><i class="fa-solid fa-star"></i> Client Testimonials</a>
-      <a href="pricing.html" class="menu-item "><i class="fa-solid fa-calculator"></i> Pricing & ROI Simulator</a>
-      <a href="contact.html" class="menu-item "><i class="fa-solid fa-calendar-check"></i> Schedule Briefing Call</a>
-    </div>
+      <!-- Accordion Section 1: Main Pages -->
+      <div class="nav-accordion-item open">
+        <div class="nav-accordion-header">
+          <span><i class="fa-solid fa-house"></i> Main Pages</span>
+          <i class="fa-solid fa-chevron-down nav-accordion-arrow"></i>
+        </div>
+        <div class="nav-accordion-body">
+          <a href="index.html" class="menu-item"><i class="fa-solid fa-circle-dot"></i> Home</a>
+          <a href="results.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> Results & Case Studies</a>
+          <a href="why-us.html" class="menu-item"><i class="fa-solid fa-shield-halved"></i> Why Us / Our Model</a>
+          <a href="testimonials.html" class="menu-item"><i class="fa-solid fa-star"></i> Client Testimonials</a>
+          <a href="pricing.html" class="menu-item"><i class="fa-solid fa-calculator"></i> Pricing & ROI Simulator</a>
+          <a href="contact.html" class="menu-item"><i class="fa-solid fa-calendar-check"></i> Schedule Briefing Call</a>
+        </div>
+      </div>
 
-    <!-- Currency Converter Section in 3-Dot Menu -->
-    <div class="menu-currency-section">
-      <div class="menu-section-label"><i class="fa-solid fa-coins"></i> Select Currency</div>
-      <div class="currency-switch">
-        <button class="currency-btn active" data-currency="INR" onclick="setGlobalCurrency('INR')">INR (₹)</button>
-        <button class="currency-btn" data-currency="USD" onclick="setGlobalCurrency('USD')">USD ($)</button>
-        <button class="currency-btn" data-currency="EUR" onclick="setGlobalCurrency('EUR')">EUR (€)</button>
-        <button class="currency-btn" data-currency="GBP" onclick="setGlobalCurrency('GBP')">GBP (£)</button>
-        <button class="currency-btn" data-currency="AED" onclick="setGlobalCurrency('AED')">AED (د.إ)</button>
+      <!-- Accordion Section 2: Service Categories (11 Pillars) -->
+      <div class="nav-accordion-item">
+        <div class="nav-accordion-header">
+          <span><i class="fa-solid fa-cubes"></i> Service Categories</span>
+          <i class="fa-solid fa-chevron-down nav-accordion-arrow"></i>
+        </div>
+        <div class="nav-accordion-body">
+          <a href="services.html" class="menu-item highlight-item"><i class="fa-solid fa-layer-group"></i> All Services Catalog</a>
+          <a href="ai-solutions.html" class="menu-item"><i class="fa-solid fa-robot"></i> AI Solutions</a>
+          <a href="video-production.html" class="menu-item"><i class="fa-solid fa-video"></i> Video & Animation</a>
+          <a href="graphic-design.html" class="menu-item"><i class="fa-solid fa-palette"></i> Creative Design</a>
+          <a href="photo-services.html" class="menu-item"><i class="fa-solid fa-camera-retro"></i> Photo Services</a>
+          <a href="digital-marketing.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> Digital Marketing</a>
+          <a href="social-media-management.html" class="menu-item"><i class="fa-solid fa-globe"></i> Social Media Handling</a>
+          <a href="web-app-development.html" class="menu-item"><i class="fa-solid fa-laptop-code"></i> Web & App Dev</a>
+          <a href="ui-ux-design.html" class="menu-item"><i class="fa-solid fa-compass-drafting"></i> UI/UX Design</a>
+          <a href="software-coding-solutions.html" class="menu-item"><i class="fa-solid fa-cubes"></i> Software Solutions</a>
+          <a href="technology-solutions.html" class="menu-item"><i class="fa-solid fa-sliders"></i> Technology Solutions</a>
+          <a href="additional-services.html" class="menu-item"><i class="fa-solid fa-folder-open"></i> Additional Retainers</a>
+        </div>
+      </div>
+
+      <!-- Accordion Section 3: Currency Switcher -->
+      <div class="nav-accordion-item">
+        <div class="nav-accordion-header">
+          <span><i class="fa-solid fa-coins"></i> Currency Settings</span>
+          <i class="fa-solid fa-chevron-down nav-accordion-arrow"></i>
+        </div>
+        <div class="nav-accordion-body">
+          <div class="currency-switch">
+            <button class="currency-btn active" data-currency="INR" onclick="setGlobalCurrency('INR')">INR (₹)</button>
+            <button class="currency-btn" data-currency="USD" onclick="setGlobalCurrency('USD')">USD ($)</button>
+            <button class="currency-btn" data-currency="EUR" onclick="setGlobalCurrency('EUR')">EUR (€)</button>
+            <button class="currency-btn" data-currency="GBP" onclick="setGlobalCurrency('GBP')">GBP (£)</button>
+            <button class="currency-btn" data-currency="AED" onclick="setGlobalCurrency('AED')">AED (د.إ)</button>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
   </div>
 
 

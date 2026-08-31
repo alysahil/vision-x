@@ -2061,4 +2061,21 @@ document.addEventListener('DOMContentLoaded', () => {
       card.classList.toggle('active', !isActive);
     });
   });
+
+  /* --- 18. Drawer Accordion Navigation Toggle --- */
+  const navAccordionHeaders = document.querySelectorAll('.nav-accordion-header');
+  navAccordionHeaders.forEach(header => {
+    header.addEventListener('click', () => {
+      const item = header.closest('.nav-accordion-item');
+      if (!item) return;
+      
+      const isOpen = item.classList.contains('open');
+      
+      document.querySelectorAll('.nav-accordion-item').forEach(i => {
+        if (i !== item) i.classList.remove('open');
+      });
+
+      item.classList.toggle('open', !isOpen);
+    });
+  });
 });
