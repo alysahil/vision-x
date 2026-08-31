@@ -40,12 +40,21 @@
   --shadow-glow-pink: 0 0 20px rgba(110, 92, 34, 0.18);
 }
 
-/* Reset */
+/* Reset & Anti-Zoom Mobile Protection */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  touch-action: manipulation;
+}
+
+html, body {
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {

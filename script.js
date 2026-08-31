@@ -2007,4 +2007,20 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   initMobileAccordions();
+
+  /* --- 15. Strict Mobile Anti-Zoom Event Listeners --- */
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function(e) {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+      }
+    }
+    lastTouchEnd = now;
+  }, { passive: false });
+
+  document.addEventListener('gesturestart', function(e) {
+    e.preventDefault();
+  }, { passive: false });
 });
