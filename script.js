@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(139, 92, 246, 0.4)';
+        ctx.fillStyle = 'rgba(201, 162, 39, 0.4)';
         ctx.fill();
       }
     }
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.moveTo(points[i].x, points[i].y);
             ctx.lineTo(points[j].x, points[j].y);
             const alpha = (maxDistance - dist) / maxDistance * 0.15;
-            ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
+            ctx.strokeStyle = `rgba(236, 203, 108, ${alpha})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
@@ -99,6 +99,32 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     animate();
   }
+
+  // Global currency syncing across all calculators and lists
+  window.setGlobalCurrency = function(currency) {
+    activeCurrency = currency;
+    
+    // Sync button classes in DOM
+    document.querySelectorAll('.currency-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-currency') === currency);
+    });
+    
+    // Save to localStorage so it stays active across pages
+    localStorage.setItem('activeCurrency', currency);
+    
+    // Re-render services grid if present
+    if (typeof renderServices === 'function') renderServices();
+    
+    // Re-render calculator if present
+    if (typeof updateRetainerCalculator === 'function') updateRetainerCalculator();
+    if (typeof updateInvoiceCalculator === 'function') updateInvoiceCalculator();
+  };
+
+  // On page load, read currency from localStorage
+  const savedCurrency = localStorage.getItem('activeCurrency') || 'INR';
+  setTimeout(() => {
+    window.setGlobalCurrency(savedCurrency);
+  }, 100);
 
   /* --- 2. Spotlight Hover Card Effect --- */
   const initSpotlightCard = (card) => {
@@ -120,11 +146,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const typistElement = document.getElementById('typist-role');
   if (typistElement) {
     const roles = [
-      'AI Growth Agency', 
-      'SaaS Development Partners', 
-      'High-converting Design Studio', 
-      'Digital Marketing Experts', 
-      'Automation Workflow Wizards'
+      'Performance Media Studio', 
+      'AI Growth Systems Builders', 
+      'Conversion Engineering Studio', 
+      'Revenue Velocity Analysts'
     ];
     let roleIndex = 0;
     let charIndex = 0;
@@ -1171,6 +1196,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  const currencyRates = {
+    INR: { rate: 1.0, symbol: '₹', locale: 'en-IN' },
+    USD: { rate: 1 / 40, symbol: '$', locale: 'en-US' },
+    EUR: { rate: 1 / 45, symbol: '€', locale: 'de-DE' },
+    GBP: { rate: 1 / 52, symbol: '£', locale: 'en-GB' },
+    AED: { rate: 1 / 11, symbol: 'AED ', locale: 'ar-AE' }
+  };
+
+  // Parser and converter for multi-currency values
+  function convertPrice(priceStr, currency) {
+    const config = currencyRates[currency] || currencyRates.INR;
+    if (currency === 'INR') return priceStr;
+    return priceStr.replace(/₹([\d,]+)/g, (match, p1) => {
+      const inrVal = parseFloat(p1.replace(/,/g, ''));
+      const converted = Math.round(inrVal * config.rate);
+      return config.symbol + converted.toLocaleString(config.locale);
+    });
+  }
+
   const renderServices = () => {
     if (!gridContainer) return;
     gridContainer.innerHTML = '';
@@ -1254,7 +1298,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; border-top: 1px solid var(--border-color); padding-top: 12px; margin-top: auto;">
               <span style="font-size: 11px; color: #64748b; text-transform: uppercase; font-weight: 700;">Starting Cost</span>
-              <span style="font-size: 16px; font-weight: 800; color: var(--accent-cyan); font-family: var(--font-headings);">${service.priceStr}</span>
+              <span style="font-size: 16px; font-weight: 800; color: var(--accent-cyan); font-family: var(--font-headings);">${convertPrice(service.priceStr, activeCurrency)}</span>
             </div>
           </div>
         </div>
@@ -1403,13 +1447,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const outRevenue = document.getElementById('calc-out-revenue');
   const featureList = document.getElementById('calc-features');
 
-  const formatRupees = (val) => '₹' + parseInt(val).toLocaleString('en-IN');
+  const formatCurrency = (val, currency) => {
+    const config = currencyRates[currency] || currencyRates.INR;
+    if (currency === 'INR') {
+      return '₹' + parseInt(val).toLocaleString('en-IN');
+    }
+    const converted = Math.round(val * config.rate);
+    return config.symbol + converted.toLocaleString(config.locale);
+  };
 
   const updateRetainerCalculator = () => {
     if (!budgetSlider || calculatorMode !== 'retainer') return;
     
     const budget = parseInt(budgetSlider.value);
-    budgetValue.textContent = formatRupees(budget);
+    budgetValue.textContent = formatCurrency(budget, activeCurrency);
 
     let activeCount = 0;
     let channelMultiplier = 1.0;
@@ -1436,9 +1487,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const addedValue = budget * roas;
 
     outPlan.textContent = budget < 50000 ? 'Starter Growth Plan' : (budget < 150000 ? 'Scale Accelerator Plan' : 'Enterprise Dominance Plan');
-    outPrice.textContent = formatRupees(budget) + '/mo';
+    outPrice.textContent = formatCurrency(budget, activeCurrency) + '/mo';
     outRoi.textContent = roas > 0 ? roas.toFixed(1) + 'x ROAS' : '0.0x';
-    outRevenue.textContent = formatRupees(addedValue) + '/mo';
+    outRevenue.textContent = formatCurrency(addedValue, activeCurrency) + '/mo';
 
     let features = [];
     if (budget < 50000) {
@@ -1471,7 +1522,7 @@ document.addEventListener('DOMContentLoaded', () => {
       features.forEach(f => {
         const li = document.createElement('div');
         li.className = 'calc-feature-item';
-        li.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--accent-emerald); margin-right: 8px;"></i> ${f}`;
+        li.innerHTML = `<i class="fa-solid fa-circle-check" style="color: var(--accent-gold-bright); margin-right: 8px;"></i> ${f}`;
         featureList.appendChild(li);
       });
     }
@@ -1488,9 +1539,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <p style="font-size: 13px; color: #64748b; text-align: center; padding: 20px 0;">No services selected. Click "Add to Calculator" on any service card in the sub-pages to build your custom invoice.</p>
       `;
       outPlan.textContent = 'Custom Retainer';
-      outPrice.textContent = formatRupees(0);
+      outPrice.textContent = formatCurrency(0, activeCurrency);
       outRoi.textContent = '0.0x';
-      outRevenue.textContent = formatRupees(0);
+      outRevenue.textContent = formatCurrency(0, activeCurrency);
       if (featureList) featureList.innerHTML = '';
       return;
     }
@@ -1515,7 +1566,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <span style="color:#fff; font-weight:600;">${service.name}</span>
         </div>
         <div style="display:flex; align-items:center; gap:12px;">
-          <span style="color: var(--accent-cyan); font-weight:700;">${service.priceStr}</span>
+          <span style="color: var(--accent-gold-bright); font-weight:700;">${convertPrice(service.priceStr, activeCurrency)}</span>
           <button type="button" style="background:transparent; border:none; color:#ef4444; cursor:pointer;" onclick="window.removeInvoiceItem(${index})">
             <i class="fa-solid fa-trash-can"></i>
           </button>
@@ -1532,9 +1583,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let expectedRevenueLift = totalSum * baseRoiVal * efficiencyRate;
 
     outPlan.textContent = `Custom Package (${selectedServices.size} Items)`;
-    outPrice.textContent = formatRupees(totalSum);
+    outPrice.textContent = formatCurrency(totalSum, activeCurrency);
     outRoi.textContent = (baseRoiVal * efficiencyRate).toFixed(1) + 'x ROI';
-    outRevenue.textContent = formatRupees(expectedRevenueLift) + ' est.';
+    outRevenue.textContent = formatCurrency(expectedRevenueLift, activeCurrency) + ' est.';
 
     const activeCategories = Array.from(selectedServices).map(idx => servicesData[idx].categoryName);
     const uniqueCategories = Array.from(new Set(activeCategories));
@@ -1729,16 +1780,100 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   window.addEventListener('scroll', scrollSpy);
 
-  /* --- 12. Form Validation & Submission --- */
+  /* --- 12. Form Validation & Submission with local storage log --- */
   const contactForm = document.getElementById('contact-form-widget');
+  
+  // Save original form HTML for reset function
+  let originalFormHTML = "";
   if (contactForm) {
+    originalFormHTML = contactForm.innerHTML;
+  }
+
+  window.resetContactForm = function() {
+    if (contactForm) {
+      contactForm.innerHTML = originalFormHTML;
+      attachFormSubmitListener();
+      
+      // Re-initialize calendar grid variables and rebuild it
+      const calendarGrid = document.getElementById('calendar-grid');
+      const timeSlotsContainer = document.getElementById('time-slots');
+      const dateInputHidden = document.getElementById('booking-date-hidden');
+      const timeInputHidden = document.getElementById('booking-time-hidden');
+      
+      if (calendarGrid) {
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        calendarGrid.innerHTML = '';
+        daysOfWeek.forEach(day => {
+          const header = document.createElement('div');
+          header.className = 'calendar-header-day';
+          header.textContent = day;
+          calendarGrid.appendChild(header);
+        });
+
+        const firstDayIndex = tomorrow.getDay();
+        for (let i = 0; i < firstDayIndex; i++) {
+          const pad = document.createElement('div');
+          pad.className = 'calendar-day disabled';
+          calendarGrid.appendChild(pad);
+        }
+
+        for (let i = 0; i < 7; i++) {
+          const dateObj = new Date(tomorrow);
+          dateObj.setDate(tomorrow.getDate() + i);
+
+          const dayBtn = document.createElement('div');
+          dayBtn.className = 'calendar-day';
+          dayBtn.textContent = dateObj.getDate();
+          dayBtn.setAttribute('data-date', `${dateObj.getFullYear()}-${dateObj.getMonth() + 1}-${dateObj.getDate()}`);
+          dayBtn.setAttribute('data-formatted', `${months[dateObj.getMonth()]} ${dateObj.getDate()}, ${dateObj.getFullYear()}`);
+
+          if (dateObj.getDay() === 0) {
+            dayBtn.classList.add('disabled');
+          } else {
+            dayBtn.addEventListener('click', () => {
+              document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('active'));
+              dayBtn.classList.add('active');
+              dateInputHidden.value = dayBtn.getAttribute('data-formatted');
+              timeSlotsContainer.style.display = 'grid';
+              
+              timeSlotsContainer.innerHTML = '';
+              const slots = ['10:00 AM', '11:30 AM', '02:00 PM', '03:30 PM', '05:00 PM'];
+              slots.forEach(slot => {
+                const slotBtn = document.createElement('div');
+                slotBtn.className = 'time-slot';
+                slotBtn.textContent = slot;
+                slotBtn.addEventListener('click', () => {
+                  document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('active'));
+                  slotBtn.classList.add('active');
+                  timeInputHidden.value = slot;
+                });
+                timeSlotsContainer.appendChild(slotBtn);
+              });
+            });
+          }
+          calendarGrid.appendChild(dayBtn);
+        }
+      }
+    }
+  };
+
+  function attachFormSubmitListener() {
+    const contactForm = document.getElementById('contact-form-widget');
+    if (!contactForm) return;
+
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       
       const name = document.getElementById('form-name').value.trim();
       const email = document.getElementById('form-email').value.trim();
-      const date = dateInputHidden.value;
-      const time = timeInputHidden.value;
+      const company = document.getElementById('form-company') ? document.getElementById('form-company').value.trim() : '';
+      const message = document.getElementById('form-msg') ? document.getElementById('form-msg').value.trim() : '';
+      const date = document.getElementById('booking-date-hidden').value;
+      const time = document.getElementById('booking-time-hidden').value;
 
       if (!name || !email) {
         alert('Please fill out all required fields.');
@@ -1750,12 +1885,83 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      alert(`Thank you, ${name}! Your Strategy Call is booked for ${date} at ${time}. We've sent a calendar invite to ${email}.`);
-      contactForm.reset();
-      timeSlotsContainer.style.display = 'none';
-      document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('active'));
+      // Save submission to local storage
+      const submission = {
+        name,
+        email,
+        company,
+        message,
+        service: `Strategy Call (${date} at ${time})`,
+        timestamp: new Date().toISOString()
+      };
+      
+      const quotes = JSON.parse(localStorage.getItem('quotes') || '[]');
+      quotes.push(submission);
+      localStorage.setItem('quotes', JSON.stringify(quotes));
+
+      // Render success screen
+      contactForm.innerHTML = `
+        <div class="submission-success-card">
+          <div class="success-icon">✓</div>
+          <h3>Strategy Call Booked!</h3>
+          <p>Thank you, <strong>${name}</strong>. We have scheduled your briefing session.</p>
+          <p class="sub-detail">Preferred Slot: <strong>${date} at ${time}</strong>.</p>
+          <p class="sub-detail">A calendar invitation and meet link have been sent to <strong>${email}</strong>.</p>
+          <button class="btn btn-primary" onclick="resetContactForm()" style="margin-top:20px; font-size:12px; padding:10px 20px; width:auto; border-radius:100px;">Book Another Slot</button>
+        </div>
+      `;
+
+      // Update developer log
+      const submissionCount = document.getElementById('submissionCount');
+      if (submissionCount) submissionCount.textContent = quotes.length;
+      updateSubmissionsLog();
     });
   }
+
+  // Developer Submissions Log
+  const demoLogToggle = document.getElementById('demoLogToggle');
+  const demoLogContent = document.getElementById('demoLogContent');
+  const demoLogList = document.getElementById('demoLogList');
+  const submissionCount = document.getElementById('submissionCount');
+  const noSubmissionsMsg = document.getElementById('noSubmissionsMsg');
+
+  if (demoLogToggle) {
+    demoLogToggle.addEventListener('click', () => {
+      demoLogContent.classList.toggle('show');
+      updateSubmissionsLog();
+    });
+  }
+
+  function updateSubmissionsLog() {
+    if (!demoLogList) return;
+    const quotes = JSON.parse(localStorage.getItem('quotes') || '[]');
+    if (submissionCount) submissionCount.textContent = quotes.length;
+    
+    if (quotes.length === 0) {
+      if (noSubmissionsMsg) noSubmissionsMsg.style.display = 'block';
+      demoLogList.innerHTML = '';
+      return;
+    }
+    
+    if (noSubmissionsMsg) noSubmissionsMsg.style.display = 'none';
+    demoLogList.innerHTML = quotes.map(q => `
+      <div class="demo-submission-item">
+        <div class="demo-sub-header">
+          <span>${new Date(q.timestamp).toLocaleString()}</span>
+          <span>${q.service}</span>
+        </div>
+        <div class="demo-sub-meta">
+          <strong>${q.name}</strong> (${q.email}) ${q.company ? `at <em>${q.company}</em>` : ''}
+        </div>
+        <div class="demo-sub-msg">${q.message || 'No extra goals specified.'}</div>
+      </div>
+    `).reverse().join('');
+  }
+
+  // Init
+  attachFormSubmitListener();
+  const initialQuotes = JSON.parse(localStorage.getItem('quotes') || '[]');
+  if (submissionCount) submissionCount.textContent = initialQuotes.length;
 
   /* --- 13. Mobile Drawer Navigation toggle --- */
   const mobileToggle = document.getElementById('mobile-drawer-toggle');
@@ -1776,4 +1982,29 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  /* --- 14. Mobile Category Accordion Functionality --- */
+  function initMobileAccordions() {
+    const spotlightCards = document.querySelectorAll('.spotlight-card');
+    spotlightCards.forEach(card => {
+      const titleEl = card.querySelector('.service-title');
+      const descEl = card.querySelector('.service-desc');
+      if (!titleEl || !descEl) return;
+      
+      card.addEventListener('click', (e) => {
+        if (window.innerWidth >= 768) return; // Mobile view only
+        if (e.target.tagName === 'A' || e.target.closest('a')) return;
+        
+        const isExpanded = card.classList.contains('mobile-expanded');
+        
+        document.querySelectorAll('.spotlight-card.mobile-expanded').forEach(c => {
+          if (c !== card) c.classList.remove('mobile-expanded');
+        });
+
+        card.classList.toggle('mobile-expanded', !isExpanded);
+      });
+    });
+  }
+
+  initMobileAccordions();
 });
