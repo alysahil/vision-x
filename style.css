@@ -2515,6 +2515,38 @@ html, body {
   box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
 }
 
+@media (max-width: 1024px) {
+  .nav-menu {
+    display: none !important;
+  }
+  .desktop-btn-only {
+    display: none !important;
+  }
+  .navbar, .navbar.scrolled {
+    height: 64px !important;
+    background-color: rgba(5, 5, 10, 0.85) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid var(--border-color) !important;
+  }
+  .nav-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    padding: 0 16px !important;
+  }
+  .logo {
+    font-size: 18px !important;
+  }
+  .logo-img {
+    height: 32px !important;
+  }
+  .nav-actions {
+    margin-left: auto !important;
+  }
+}
+
 .three-dots-menu-drawer {
   position: fixed;
   top: 0;
