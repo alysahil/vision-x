@@ -244,9 +244,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-menu {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: none !important;
+}
+
+@media (min-width: 1025px) {
+  .nav-menu {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+  }
 }
 
 .nav-link {
@@ -2513,6 +2519,16 @@ html, body {
   color: #fff;
   transform: scale(1.08) rotate(90deg);
   box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
+}
+
+.desktop-btn-only {
+  display: none !important;
+}
+
+@media (min-width: 1025px) {
+  .desktop-btn-only {
+    display: inline-flex !important;
+  }
 }
 
 @media (max-width: 1024px) {
