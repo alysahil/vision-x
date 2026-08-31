@@ -1756,12 +1756,12 @@ h1, h2, h3, h4, h5, h6 {
     height: 70px;
   }
   
-  .desktop-menu, .nav-actions .btn {
-    display: none;
+  .nav-menu, .nav-actions .btn, .nav-actions .currency-switch-container {
+    display: none !important;
   }
   
   .mobile-toggle {
-    display: block;
+    display: block !important;
   }
   
   .form-row {
