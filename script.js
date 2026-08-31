@@ -2043,4 +2043,22 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  /* --- 17. Explicit Accordion Card Click Handler --- */
+  const accordionCards = document.querySelectorAll('.accordion-card');
+  accordionCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A' || e.target.closest('a')) return;
+
+      const isActive = card.classList.contains('active');
+
+      if (window.innerWidth <= 768) {
+        accordionCards.forEach(c => {
+          if (c !== card) c.classList.remove('active');
+        });
+      }
+
+      card.classList.toggle('active', !isActive);
+    });
+  });
 });

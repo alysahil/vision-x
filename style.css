@@ -2492,6 +2492,84 @@ html, body {
 }
 
 /* ==========================================================================
+   EXPLICIT ACCORDION CARDS STYLES (MOBILE & DESKTOP)
+   ========================================================================== */
+
+.accordion-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 22px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.accordion-title-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.accordion-toggle-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--accent-gold-bright);
+  transition: transform 0.3s ease, background 0.3s ease;
+  flex-shrink: 0;
+}
+
+.accordion-card.active .accordion-toggle-icon {
+  transform: rotate(180deg);
+  background: rgba(201, 162, 39, 0.15);
+  border-color: var(--accent-gold);
+}
+
+.accordion-content-body {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(201, 162, 39, 0.12);
+  transition: all 0.3s ease-out;
+}
+
+/* Mobile Accordion Collapsed Default */
+@media (max-width: 768px) {
+  .accordion-content-body {
+    display: none;
+  }
+
+  .accordion-card.active .accordion-content-body {
+    display: block !important;
+    animation: fadeInSlide 0.3s ease-out;
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
    THREE-DOT MENU BUTTON & NAVIGATION DRAWER STYLES
    ========================================================================== */
 
