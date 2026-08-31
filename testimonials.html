@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <title>Client Testimonials — Kinetic Growth</title>
+  <meta name="description" content="Read feedback from founders and executives scaling with Kinetic Growth.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="assets/logo-icon.png">
+</head>
+<body>
+
+  <canvas id="canvas-backdrop"></canvas>
+  <div class="blob-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  
+  <!-- Header / Navigation Bar with 3-Dot Menu -->
+  <header class="navbar" id="header-nav">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/logo-icon.png" alt="Kinetic Growth Logo" class="logo-img">
+        Kinetic <b>Growth</b>
+      </a>
+      
+      <!-- Desktop Direct Links -->
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link ">Home</a>
+        <a href="services.html" class="nav-link ">Services</a>
+        <a href="results.html" class="nav-link ">Results</a>
+        <a href="why-us.html" class="nav-link ">Why Us</a>
+        <a href="testimonials.html" class="nav-link active">Testimonials</a>
+        <a href="pricing.html" class="nav-link ">Pricing</a>
+        <a href="contact.html" class="nav-link ">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- 3-Dot Menu Button -->
+        <button class="three-dots-btn" id="three-dots-toggle" aria-label="Open Options Menu" title="Menu Options">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+        <a href="contact.html" class="btn btn-primary btn-sm desktop-btn-only">Start a Project</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3-Dot Menu Overlay & Dropdown Drawer -->
+  <div class="three-dots-menu-drawer" id="three-dots-drawer">
+    <div class="menu-drawer-header">
+      <div class="menu-title"><i class="fa-solid fa-compass"></i> Navigation Options</div>
+      <button class="menu-close-btn" id="three-dots-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    
+    <div class="menu-drawer-links">
+      <a href="index.html" class="menu-item "><i class="fa-solid fa-house"></i> Home</a>
+      <a href="services.html" class="menu-item "><i class="fa-solid fa-cubes"></i> Services & Capabilities</a>
+      <a href="results.html" class="menu-item "><i class="fa-solid fa-chart-line"></i> Results & Case Studies</a>
+      <a href="why-us.html" class="menu-item "><i class="fa-solid fa-shield-halved"></i> Why Us / Our Model</a>
+      <a href="testimonials.html" class="menu-item active"><i class="fa-solid fa-star"></i> Client Testimonials</a>
+      <a href="pricing.html" class="menu-item "><i class="fa-solid fa-calculator"></i> Pricing & ROI Simulator</a>
+      <a href="contact.html" class="menu-item "><i class="fa-solid fa-calendar-check"></i> Schedule Briefing Call</a>
+    </div>
+
+    <!-- Currency Converter Section in 3-Dot Menu -->
+    <div class="menu-currency-section">
+      <div class="menu-section-label"><i class="fa-solid fa-coins"></i> Select Currency</div>
+      <div class="currency-switch">
+        <button class="currency-btn active" data-currency="INR" onclick="setGlobalCurrency('INR')">INR (₹)</button>
+        <button class="currency-btn" data-currency="USD" onclick="setGlobalCurrency('USD')">USD ($)</button>
+        <button class="currency-btn" data-currency="EUR" onclick="setGlobalCurrency('EUR')">EUR (€)</button>
+        <button class="currency-btn" data-currency="GBP" onclick="setGlobalCurrency('GBP')">GBP (£)</button>
+        <button class="currency-btn" data-currency="AED" onclick="setGlobalCurrency('AED')">AED (د.إ)</button>
+      </div>
+    </div>
+  </div>
+
+
+  <main style="padding-top: 100px; min-height: 85vh;">
+    <section class="section reveal" id="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge badge-pink">Client Testimonials</div>
+          <h2 class="section-title">What Our Partners<br><span class="text-gradient-cyan">Say About Us</span></h2>
+        </div>
+
+        <div class="testimonial-container">
+          <div class="testimonial-slider">
+            <div class="testimonial-track" id="testimonial-track">
+              <!-- Slide 1 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="testimonial-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+                  <div class="testimonial-badge">✦ 7.5x revenue in 6 months</div>
+                  <p class="testimonial-text">"VisionX completely transformed our digital presence. Within 6 months, our revenue went from $45K to $340K per month. The AI-driven Meta Ads strategy they built for us is nothing short of genius. The team is responsive, data-obsessed, and genuinely cares about our growth."</p>
+                  <div class="testimonial-author">
+                    <div class="author-info">
+                      <div class="author-avatar">SM</div>
+                      <div>
+                        <div class="author-name">Sarah Mitchell</div>
+                        <div class="author-role">CEO, Luminary Fashion</div>
+                      </div>
+                    </div>
+                    <div class="author-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="testimonial-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+                  <div class="testimonial-badge">✦ 7.4x ROAS on B2B campaigns</div>
+                  <p class="testimonial-text">"The structured landing page test variants and long-tail SEO content built by VisionX scaled our qualified pipeline beyond expectations. We went from $12K to $89K in MRR inside 8 months. Their level of reporting and transparency is unmatched."</p>
+                  <div class="testimonial-author">
+                    <div class="author-info">
+                      <div class="author-avatar">DK</div>
+                      <div>
+                        <div class="author-name">David Kovacs</div>
+                        <div class="author-role">Co-Founder, Synthetix Ops</div>
+                      </div>
+                    </div>
+                    <div class="author-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <div class="testimonial-quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+                  <div class="testimonial-badge">✦ Local sales grew 7x</div>
+                  <p class="testimonial-text">"Creating localized social video systems and ad sets for our store branches immediately filled our seats. Deploying the customer loyalty database tool kept guests returning. We grew our locations' monthly intake from $30K to $210K."</p>
+                  <div class="testimonial-author">
+                    <div class="author-info">
+                      <div class="author-avatar">MC</div>
+                      <div>
+                        <div class="author-name">Marco Castella</div>
+                        <div class="author-role">Operations Director, Castella Group</div>
+                      </div>
+                    </div>
+                    <div class="author-rating">
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="slider-controls">
+            <div class="slider-dots">
+              <button class="slider-dot active" aria-label="Slide 1"></button>
+              <button class="slider-dot" aria-label="Slide 2"></button>
+              <button class="slider-dot" aria-label="Slide 3"></button>
+            </div>
+            <div class="slider-arrows">
+              <button class="slider-arrow" id="prev-testimonial" aria-label="Previous Testimonial"><i class="fa-solid fa-chevron-left"></i></button>
+              <button class="slider-arrow" id="next-testimonial" aria-label="Next Testimonial"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/logo-icon.png" alt="Kinetic Growth Logo" class="logo-img">
+            Kinetic <b>Growth</b>
+          </a>
+          <p class="footer-desc">A performance marketing and AI-systems studio turning attention into measurable, compounding velocity.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+            <li><a href="results.html" class="footer-link">Results</a></li>
+            <li><a href="why-us.html" class="footer-link">Why Us</a></li>
+            <li><a href="testimonials.html" class="footer-link">Testimonials</a></li>
+            <li><a href="pricing.html" class="footer-link">Pricing Calculator</a></li>
+            <li><a href="contact.html" class="footer-link">Contact Briefing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Capabilities</h4>
+          <ul class="footer-links">
+            <li><a href="ai-solutions.html" class="footer-link">AI Automation</a></li>
+            <li><a href="digital-marketing.html" class="footer-link">Meta & Google Ads</a></li>
+            <li><a href="web-app-development.html" class="footer-link">Web & App Dev</a></li>
+            <li><a href="ui-ux-design.html" class="footer-link">UI/UX Design</a></li>
+            <li><a href="software-coding-solutions.html" class="footer-link">Software Solutions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Legal & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="tel:+918318797293" class="footer-link">+91 83187 97293</a></li>
+            <li><a href="mailto:info@kineticgrowth.co.in" class="footer-link">info@kineticgrowth.co.in</a></li>
+            <li><a href="contact.html" class="footer-link">Schedule Meeting</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 Kinetic Growth. All rights reserved.</p>
+        <div class="system-status">
+          <span class="status-dot" style="background: #eccb6c; box-shadow: 0 0 6px #eccb6c;"></span> All systems operational
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

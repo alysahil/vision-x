@@ -39,45 +39,44 @@
       
       <!-- Desktop Navigation Menu -->
       <nav class="nav-menu">
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#results" class="nav-link">Results</a>
-        <a href="#why-us" class="nav-link">Why Us</a>
-        <a href="#testimonials" class="nav-link">Testimonials</a>
-        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="services.html" class="nav-link">Services</a>
+        <a href="results.html" class="nav-link">Results</a>
+        <a href="why-us.html" class="nav-link">Why Us</a>
+        <a href="testimonials.html" class="nav-link">Testimonials</a>
+        <a href="pricing.html" class="nav-link">Pricing</a>
+        <a href="contact.html" class="nav-link">Contact</a>
       </nav>
 
       <div class="nav-actions">
-        <!-- Global Currency Switcher Pill -->
-        <div class="currency-switch-container" style="margin-right: 14px;">
-          <div class="currency-switch">
-            <button class="currency-btn active" data-currency="INR" onclick="setGlobalCurrency('INR')">INR (₹)</button>
-            <button class="currency-btn" data-currency="USD" onclick="setGlobalCurrency('USD')">USD ($)</button>
-            <button class="currency-btn" data-currency="EUR" onclick="setGlobalCurrency('EUR')">EUR (€)</button>
-            <button class="currency-btn" data-currency="GBP" onclick="setGlobalCurrency('GBP')">GBP (£)</button>
-            <button class="currency-btn" data-currency="AED" onclick="setGlobalCurrency('AED')">AED (د.إ)</button>
-          </div>
-        </div>
-        <a href="#contact" class="btn btn-primary btn-sm">Start a Project</a>
-        <button class="mobile-toggle" id="mobile-drawer-toggle" aria-label="Toggle Menu">
-          <i class="fa-solid fa-bars"></i>
+        <button class="three-dots-btn" id="three-dots-toggle" aria-label="Open Menu" title="Menu Options">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
+        <a href="contact.html" class="btn btn-primary btn-sm desktop-btn-only">Start a Project</a>
       </div>
     </div>
   </header>
 
-  <!-- Mobile Navigation Drawer -->
-  <div class="mobile-drawer" id="mobile-drawer" style="position: fixed; top: 0; right: -300px; width: 300px; height: 100vh; background: rgba(10, 10, 18, 0.98); border-left: 1px solid var(--border-color); backdrop-filter: blur(20px); z-index: 99; display: flex; flex-direction: column; padding: 100px 30px; gap: 20px; transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
-    <a href="#home" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Home</a>
-    <a href="#services" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Services</a>
-    <a href="#results" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Results</a>
-    <a href="#why-us" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Why Us</a>
-    <a href="#testimonials" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Testimonials</a>
-    <a href="#pricing" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Pricing</a>
+  <!-- 3-Dot Menu Drawer -->
+  <div class="three-dots-menu-drawer" id="three-dots-drawer">
+    <div class="menu-drawer-header">
+      <div class="menu-title"><i class="fa-solid fa-compass"></i> Navigation Options</div>
+      <button class="menu-close-btn" id="three-dots-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
     
-    <!-- Mobile Currency Switcher -->
-    <div style="padding: 12px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); margin: 10px 0;">
-      <div class="currency-switch" style="width: 100%; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;">
+    <div class="menu-drawer-links">
+      <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="services.html" class="menu-item"><i class="fa-solid fa-cubes"></i> Services & Capabilities</a>
+      <a href="results.html" class="menu-item"><i class="fa-solid fa-chart-line"></i> Results & Case Studies</a>
+      <a href="why-us.html" class="menu-item"><i class="fa-solid fa-shield-halved"></i> Why Us / Our Model</a>
+      <a href="testimonials.html" class="menu-item"><i class="fa-solid fa-star"></i> Client Testimonials</a>
+      <a href="pricing.html" class="menu-item"><i class="fa-solid fa-calculator"></i> Pricing & ROI Simulator</a>
+      <a href="contact.html" class="menu-item"><i class="fa-solid fa-calendar-check"></i> Schedule Briefing Call</a>
+    </div>
+
+    <div class="menu-currency-section">
+      <div class="menu-section-label"><i class="fa-solid fa-coins"></i> Select Currency</div>
+      <div class="currency-switch">
         <button class="currency-btn active" data-currency="INR" onclick="setGlobalCurrency('INR')">INR (₹)</button>
         <button class="currency-btn" data-currency="USD" onclick="setGlobalCurrency('USD')">USD ($)</button>
         <button class="currency-btn" data-currency="EUR" onclick="setGlobalCurrency('EUR')">EUR (€)</button>
@@ -85,14 +84,7 @@
         <button class="currency-btn" data-currency="AED" onclick="setGlobalCurrency('AED')">AED (د.إ)</button>
       </div>
     </div>
-    
-    <a href="#contact" class="btn btn-primary" style="margin-top: 10px;">Start a Project</a>
   </div>
-  <style>
-    .mobile-drawer.open {
-      right: 0 !important;
-    }
-  </style>
 
   <main>
     <!-- 1. Hero Section -->

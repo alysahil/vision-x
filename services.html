@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <title>Services & Capabilities — Kinetic Growth</title>
+  <meta name="description" content="Explore our 11 core technology, creative, and performance marketing pillars.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="assets/logo-icon.png">
+</head>
+<body>
+
+  <canvas id="canvas-backdrop"></canvas>
+  <div class="blob-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  
+  <!-- Header / Navigation Bar with 3-Dot Menu -->
+  <header class="navbar" id="header-nav">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/logo-icon.png" alt="Kinetic Growth Logo" class="logo-img">
+        Kinetic <b>Growth</b>
+      </a>
+      
+      <!-- Desktop Direct Links -->
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link ">Home</a>
+        <a href="services.html" class="nav-link active">Services</a>
+        <a href="results.html" class="nav-link ">Results</a>
+        <a href="why-us.html" class="nav-link ">Why Us</a>
+        <a href="testimonials.html" class="nav-link ">Testimonials</a>
+        <a href="pricing.html" class="nav-link ">Pricing</a>
+        <a href="contact.html" class="nav-link ">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- 3-Dot Menu Button -->
+        <button class="three-dots-btn" id="three-dots-toggle" aria-label="Open Options Menu" title="Menu Options">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+        <a href="contact.html" class="btn btn-primary btn-sm desktop-btn-only">Start a Project</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3-Dot Menu Overlay & Dropdown Drawer -->
+  <div class="three-dots-menu-drawer" id="three-dots-drawer">
+    <div class="menu-drawer-header">
+      <div class="menu-title"><i class="fa-solid fa-compass"></i> Navigation Options</div>
+      <button class="menu-close-btn" id="three-dots-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    
+    <div class="menu-drawer-links">
+      <a href="index.html" class="menu-item "><i class="fa-solid fa-house"></i> Home</a>
+      <a href="services.html" class="menu-item active"><i class="fa-solid fa-cubes"></i> Services & Capabilities</a>
+      <a href="results.html" class="menu-item "><i class="fa-solid fa-chart-line"></i> Results & Case Studies</a>
+      <a href="why-us.html" class="menu-item "><i class="fa-solid fa-shield-halved"></i> Why Us / Our Model</a>
+      <a href="testimonials.html" class="menu-item "><i class="fa-solid fa-star"></i> Client Testimonials</a>
+      <a href="pricing.html" class="menu-item "><i class="fa-solid fa-calculator"></i> Pricing & ROI Simulator</a>
+      <a href="contact.html" class="menu-item "><i class="fa-solid fa-calendar-check"></i> Schedule Briefing Call</a>
+    </div>
+
+    <!-- Currency Converter Section in 3-Dot Menu -->
+    <div class="menu-currency-section">
+      <div class="menu-section-label"><i class="fa-solid fa-coins"></i> Select Currency</div>
+      <div class="currency-switch">
+        <button class="currency-btn active" data-currency="INR" onclick="setGlobalCurrency('INR')">INR (₹)</button>
+        <button class="currency-btn" data-currency="USD" onclick="setGlobalCurrency('USD')">USD ($)</button>
+        <button class="currency-btn" data-currency="EUR" onclick="setGlobalCurrency('EUR')">EUR (€)</button>
+        <button class="currency-btn" data-currency="GBP" onclick="setGlobalCurrency('GBP')">GBP (£)</button>
+        <button class="currency-btn" data-currency="AED" onclick="setGlobalCurrency('AED')">AED (د.إ)</button>
+      </div>
+    </div>
+  </div>
+
+
+  <main style="padding-top: 100px; min-height: 85vh;">
+    <section class="section reveal" id="services">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge badge-cyan">Our Capabilities</div>
+          <h2 class="section-title">Explore Our Service<br><span class="text-gradient-cyan">Categories</span></h2>
+          <p class="section-desc">We offer end-to-end solutions across 11 key technology and creative pillars. Click a category card to see the full list of individual services, starting prices, and custom configurations.</p>
+        </div>
+
+        <div class="card-grid">
+          <!-- Category 1 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.15); color: var(--accent-emerald);"><i class="fa-solid fa-robot"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">AI Solutions</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Automations, smart chatbots, content generation pipelines, custom API workflows, and system integrations.</p>
+              </div>
+              <a href="ai-solutions.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore AI Services →</a>
+            </div>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.15); color: var(--accent-blue);"><i class="fa-solid fa-video"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Video &amp; Animation</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Short/long-form editing, motion graphics, corporate media, SaaS ads, 2D/3D animations, and cinematic production.</p>
+              </div>
+              <a href="video-production.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Video Services →</a>
+            </div>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(255, 0, 229, 0.08); border: 1px solid rgba(255, 0, 229, 0.15); color: var(--accent-pink);"><i class="fa-solid fa-palette"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Creative Design</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Premium logos, brand identity guides, packaging design, infographics, business cards, and social assets.</p>
+              </div>
+              <a href="graphic-design.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Design Services →</a>
+            </div>
+          </div>
+
+          <!-- Category 4 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.15); color: var(--accent-violet);"><i class="fa-solid fa-camera-retro"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Photo Services</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Professional retouching, image enhancements, background removal, photo manipulations, and AI image synthesis.</p>
+              </div>
+              <a href="photo-services.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Photo Services →</a>
+            </div>
+          </div>
+
+          <!-- Category 5 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.15); color: var(--accent-cyan);"><i class="fa-solid fa-chart-line"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Digital Marketing</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Meta Ads, Google Ads scaling, SEO search optimization, performance metrics, and growth audit roadmaps.</p>
+              </div>
+              <a href="digital-marketing.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Marketing →</a>
+            </div>
+          </div>
+
+          <!-- Category 6 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(59, 130, 246, 0.08); border: 1px solid rgba(59, 130, 246, 0.15); color: var(--accent-blue);"><i class="fa-solid fa-globe"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Social Media Handling</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Complete SMM account handling, content calendars, community management, optimization and analytics.</p>
+              </div>
+              <a href="social-media-management.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore SMM Services →</a>
+            </div>
+          </div>
+
+          <!-- Category 7 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.15); color: var(--accent-cyan);"><i class="fa-solid fa-laptop-code"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Web &amp; App Development</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Corporate sites, landing design, dashboards, custom web apps, and SaaS platforms (Standard/Advanced).</p>
+              </div>
+              <a href="web-app-development.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Development →</a>
+            </div>
+          </div>
+
+          <!-- Category 8 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(255, 0, 229, 0.08); border: 1px solid rgba(255, 0, 229, 0.15); color: var(--accent-pink);"><i class="fa-solid fa-compass-drafting"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">UI/UX Design</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Website UI frameworks, app UI wireframes, clickable high-fidelity prototypes, and user journey audits.</p>
+              </div>
+              <a href="ui-ux-design.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore UI/UX Design →</a>
+            </div>
+          </div>
+
+          <!-- Category 9 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.15); color: var(--accent-violet);"><i class="fa-solid fa-cubes"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Software Solutions</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Frontend/backend architecture, API development, custom scripting, bug patching, and databases.</p>
+              </div>
+              <a href="software-coding-solutions.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Code Solutions →</a>
+            </div>
+          </div>
+
+          <!-- Category 10 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.15); color: var(--accent-emerald);"><i class="fa-solid fa-sliders"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Technology Solutions</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Cloud server architectures, workflow audits, IT strategy, and business-wide digital transformations.</p>
+              </div>
+              <a href="technology-solutions.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Tech Solutions →</a>
+            </div>
+          </div>
+
+          <!-- Category 11 -->
+          <div class="glass-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content service-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between; gap: 16px;">
+              <div class="service-icon" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15); color: #94a3b8;"><i class="fa-solid fa-folder-open"></i></div>
+              <div>
+                <h3 class="service-title" style="font-size: 20px; margin-bottom: 8px;">Additional Retainers</h3>
+                <p class="service-desc" style="font-size: 13px; color: #94a3b8; line-height: 1.5;">Consultations, corporate branding adjustments, pitch deck formatting, and NFT digital artworks.</p>
+              </div>
+              <a href="additional-services.html" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: auto;">Explore Additional →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/logo-icon.png" alt="Kinetic Growth Logo" class="logo-img">
+            Kinetic <b>Growth</b>
+          </a>
+          <p class="footer-desc">A performance marketing and AI-systems studio turning attention into measurable, compounding velocity.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+            <li><a href="results.html" class="footer-link">Results</a></li>
+            <li><a href="why-us.html" class="footer-link">Why Us</a></li>
+            <li><a href="testimonials.html" class="footer-link">Testimonials</a></li>
+            <li><a href="pricing.html" class="footer-link">Pricing Calculator</a></li>
+            <li><a href="contact.html" class="footer-link">Contact Briefing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Capabilities</h4>
+          <ul class="footer-links">
+            <li><a href="ai-solutions.html" class="footer-link">AI Automation</a></li>
+            <li><a href="digital-marketing.html" class="footer-link">Meta & Google Ads</a></li>
+            <li><a href="web-app-development.html" class="footer-link">Web & App Dev</a></li>
+            <li><a href="ui-ux-design.html" class="footer-link">UI/UX Design</a></li>
+            <li><a href="software-coding-solutions.html" class="footer-link">Software Solutions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Legal & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="tel:+918318797293" class="footer-link">+91 83187 97293</a></li>
+            <li><a href="mailto:info@kineticgrowth.co.in" class="footer-link">info@kineticgrowth.co.in</a></li>
+            <li><a href="contact.html" class="footer-link">Schedule Meeting</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 Kinetic Growth. All rights reserved.</p>
+        <div class="system-status">
+          <span class="status-dot" style="background: #eccb6c; box-shadow: 0 0 6px #eccb6c;"></span> All systems operational
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

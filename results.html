@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <title>Proven Results & Case Studies — Kinetic Growth</title>
+  <meta name="description" content="Explore real growth metrics, ROAS trajectories, and revenue lifts across scaled brands.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="assets/logo-icon.png">
+</head>
+<body>
+
+  <canvas id="canvas-backdrop"></canvas>
+  <div class="blob-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  
+  <!-- Header / Navigation Bar with 3-Dot Menu -->
+  <header class="navbar" id="header-nav">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/logo-icon.png" alt="Kinetic Growth Logo" class="logo-img">
+        Kinetic <b>Growth</b>
+      </a>
+      
+      <!-- Desktop Direct Links -->
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link ">Home</a>
+        <a href="services.html" class="nav-link ">Services</a>
+        <a href="results.html" class="nav-link active">Results</a>
+        <a href="why-us.html" class="nav-link ">Why Us</a>
+        <a href="testimonials.html" class="nav-link ">Testimonials</a>
+        <a href="pricing.html" class="nav-link ">Pricing</a>
+        <a href="contact.html" class="nav-link ">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- 3-Dot Menu Button -->
+        <button class="three-dots-btn" id="three-dots-toggle" aria-label="Open Options Menu" title="Menu Options">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+        <a href="contact.html" class="btn btn-primary btn-sm desktop-btn-only">Start a Project</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3-Dot Menu Overlay & Dropdown Drawer -->
+  <div class="three-dots-menu-drawer" id="three-dots-drawer">
+    <div class="menu-drawer-header">
+      <div class="menu-title"><i class="fa-solid fa-compass"></i> Navigation Options</div>
+      <button class="menu-close-btn" id="three-dots-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    
+    <div class="menu-drawer-links">
+      <a href="index.html" class="menu-item "><i class="fa-solid fa-house"></i> Home</a>
+      <a href="services.html" class="menu-item "><i class="fa-solid fa-cubes"></i> Services & Capabilities</a>
+      <a href="results.html" class="menu-item active"><i class="fa-solid fa-chart-line"></i> Results & Case Studies</a>
+      <a href="why-us.html" class="menu-item "><i class="fa-solid fa-shield-halved"></i> Why Us / Our Model</a>
+      <a href="testimonials.html" class="menu-item "><i class="fa-solid fa-star"></i> Client Testimonials</a>
+      <a href="pricing.html" class="menu-item "><i class="fa-solid fa-calculator"></i> Pricing & ROI Simulator</a>
+      <a href="contact.html" class="menu-item "><i class="fa-solid fa-calendar-check"></i> Schedule Briefing Call</a>
+    </div>
+
+    <!-- Currency Converter Section in 3-Dot Menu -->
+    <div class="menu-currency-section">
+      <div class="menu-section-label"><i class="fa-solid fa-coins"></i> Select Currency</div>
+      <div class="currency-switch">
+        <button class="currency-btn active" data-currency="INR" onclick="setGlobalCurrency('INR')">INR (₹)</button>
+        <button class="currency-btn" data-currency="USD" onclick="setGlobalCurrency('USD')">USD ($)</button>
+        <button class="currency-btn" data-currency="EUR" onclick="setGlobalCurrency('EUR')">EUR (€)</button>
+        <button class="currency-btn" data-currency="GBP" onclick="setGlobalCurrency('GBP')">GBP (£)</button>
+        <button class="currency-btn" data-currency="AED" onclick="setGlobalCurrency('AED')">AED (د.إ)</button>
+      </div>
+    </div>
+  </div>
+
+
+  <main style="padding-top: 100px; min-height: 85vh;">
+    <section class="section reveal" id="results">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge badge-emerald">Results Showcase</div>
+          <h2 class="section-title">Proven Trajectories.<br><span class="text-gradient">Measurable ROAS.</span></h2>
+          <p class="section-desc">Actual numbers from live audits and active retainer setups we manage for fast-scaling brands globally.</p>
+        </div>
+
+        <div class="results-grid">
+          <!-- Case 1 -->
+          <div class="glass-card result-card">
+            <div class="result-header">
+              <div class="result-meta">
+                <span class="result-category">Meta Ads + SEO</span>
+                <h3 class="result-title">E-Commerce Fashion</h3>
+                <span class="result-industry">Apparel Retailer</span>
+              </div>
+              <div class="result-badge-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+            </div>
+            <div class="result-chart">
+              <span class="result-chart-lbl">Revenue Lift (Monthly)</span>
+              <div class="result-bars-container">
+                <div class="result-bar-item">
+                  <div class="result-bar-fill" data-height="20%"></div>
+                  <span class="result-bar-lbl">Before</span>
+                </div>
+                <div class="result-bar-item">
+                  <div class="result-bar-fill" data-height="95%"></div>
+                  <span class="result-bar-lbl">After</span>
+                </div>
+              </div>
+            </div>
+            <div class="result-metrics">
+              <div class="metric-box">
+                <div class="metric-lbl">Revenue</div>
+                <div class="metric-vals">
+                  <span class="metric-old">$45K</span>
+                  <span class="metric-new" style="color: var(--accent-cyan);">$340K</span>
+                </div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-lbl">ROAS Scale</div>
+                <div class="metric-vals">
+                  <span class="metric-old">1.8x</span>
+                  <span class="metric-new" style="color: var(--accent-cyan);">9.2x</span>
+                </div>
+              </div>
+            </div>
+            <p class="result-summary">Restructured campaign scaling blueprints, built custom high-conversion E-commerce catalog pages, and optimized search footprints for targeted phrases.</p>
+            <div class="result-footer">
+              <span class="result-time">Achieved in <span>6 Months</span></span>
+              <a href="#contact" class="result-link">Book Free Call <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+          </div>
+
+          <!-- Case 2 -->
+          <div class="glass-card result-card">
+            <div class="result-header">
+              <div class="result-meta">
+                <span class="result-category" style="color: var(--accent-violet);">Google Ads + Content</span>
+                <h3 class="result-title">B2B SaaS Platform</h3>
+                <span class="result-industry">Tech Operations</span>
+              </div>
+              <div class="result-badge-icon" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.2); color: var(--accent-violet);"><i class="fa-solid fa-server"></i></div>
+            </div>
+            <div class="result-chart">
+              <span class="result-chart-lbl">MRR Growth Trend</span>
+              <div class="result-bars-container">
+                <div class="result-bar-item">
+                  <div class="result-bar-fill" data-height="15%"></div>
+                  <span class="result-bar-lbl">Before</span>
+                </div>
+                <div class="result-bar-item">
+                  <div class="result-bar-fill" data-height="85%" style="background: var(--gradient-violet-pink);"></div>
+                  <span class="result-bar-lbl">After</span>
+                </div>
+              </div>
+            </div>
+            <div class="results-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;">
+              <div class="metric-box">
+                <div class="metric-lbl">MRR Status</div>
+                <div class="metric-vals">
+                  <span class="metric-old">$12K</span>
+                  <span class="metric-new" style="color: var(--accent-violet);">$89K</span>
+                </div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-lbl">Funnel ROAS</div>
+                <div class="metric-vals">
+                  <span class="metric-old">2.1x</span>
+                  <span class="metric-new" style="color: var(--accent-violet);">7.4x</span>
+                </div>
+              </div>
+            </div>
+            <p class="result-summary">Developed landing comparison setups, built strategic content assets that generated ranking terms, and configured programmatic Google Ads targeting.</p>
+            <div class="result-footer">
+              <span class="result-time">Achieved in <span>8 Months</span></span>
+              <a href="#contact" class="result-link" style="color: var(--accent-violet);">Book Free Call <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+          </div>
+
+          <!-- Case 3 -->
+          <div class="glass-card result-card">
+            <div class="result-header">
+              <div class="result-meta">
+                <span class="result-category" style="color: var(--accent-pink);">Social Media + Ads</span>
+                <h3 class="result-title">Resto Chain Brand</h3>
+                <span class="result-industry">Food & Hospitality</span>
+              </div>
+              <div class="result-badge-icon" style="background: rgba(255, 0, 229, 0.1); border-color: rgba(255, 0, 229, 0.2); color: var(--accent-pink);"><i class="fa-solid fa-store"></i></div>
+            </div>
+            <div class="result-chart">
+              <span class="result-chart-lbl">Store Traffic Increase</span>
+              <div class="result-bars-container">
+                <div class="result-bar-item">
+                  <div class="result-bar-fill" data-height="25%"></div>
+                  <span class="result-bar-lbl">Before</span>
+                </div>
+                <div class="result-bar-item">
+                  <div class="result-bar-fill" data-height="100%" style="background: var(--gradient-violet-pink);"></div>
+                  <span class="result-bar-lbl">After</span>
+                </div>
+              </div>
+            </div>
+            <div class="result-metrics">
+              <div class="metric-box">
+                <div class="metric-lbl">Revenue</div>
+                <div class="metric-vals">
+                  <span class="metric-old">$30K</span>
+                  <span class="metric-new" style="color: var(--accent-pink);">$210K</span>
+                </div>
+              </div>
+              <div class="metric-box">
+                <div class="metric-lbl">Total ROAS</div>
+                <div class="metric-vals">
+                  <span class="metric-old">N/A</span>
+                  <span class="metric-new" style="color: var(--accent-pink);">12.0x</span>
+                </div>
+              </div>
+            </div>
+            <p class="result-summary">Developed short-form video strategies, created localized Facebook/Instagram ad sets, and built a custom loyalty capture tool that increased local recurring sales.</p>
+            <div class="result-footer">
+              <span class="result-time">Achieved in <span>5 Months</span></span>
+              <a href="#contact" class="result-link" style="color: var(--accent-pink);">Book Free Call <i class="fa-solid fa-chevron-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/logo-icon.png" alt="Kinetic Growth Logo" class="logo-img">
+            Kinetic <b>Growth</b>
+          </a>
+          <p class="footer-desc">A performance marketing and AI-systems studio turning attention into measurable, compounding velocity.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+            <li><a href="results.html" class="footer-link">Results</a></li>
+            <li><a href="why-us.html" class="footer-link">Why Us</a></li>
+            <li><a href="testimonials.html" class="footer-link">Testimonials</a></li>
+            <li><a href="pricing.html" class="footer-link">Pricing Calculator</a></li>
+            <li><a href="contact.html" class="footer-link">Contact Briefing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Capabilities</h4>
+          <ul class="footer-links">
+            <li><a href="ai-solutions.html" class="footer-link">AI Automation</a></li>
+            <li><a href="digital-marketing.html" class="footer-link">Meta & Google Ads</a></li>
+            <li><a href="web-app-development.html" class="footer-link">Web & App Dev</a></li>
+            <li><a href="ui-ux-design.html" class="footer-link">UI/UX Design</a></li>
+            <li><a href="software-coding-solutions.html" class="footer-link">Software Solutions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Legal & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="tel:+918318797293" class="footer-link">+91 83187 97293</a></li>
+            <li><a href="mailto:info@kineticgrowth.co.in" class="footer-link">info@kineticgrowth.co.in</a></li>
+            <li><a href="contact.html" class="footer-link">Schedule Meeting</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 Kinetic Growth. All rights reserved.</p>
+        <div class="system-status">
+          <span class="status-dot" style="background: #eccb6c; box-shadow: 0 0 6px #eccb6c;"></span> All systems operational
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

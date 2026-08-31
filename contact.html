@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <title>Schedule A Briefing Call — Kinetic Growth</title>
+  <meta name="description" content="Select your briefing date and connect directly with our studio team.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="assets/logo-icon.png">
+</head>
+<body>
+
+  <canvas id="canvas-backdrop"></canvas>
+  <div class="blob-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  
+  <!-- Header / Navigation Bar with 3-Dot Menu -->
+  <header class="navbar" id="header-nav">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/logo-icon.png" alt="Kinetic Growth Logo" class="logo-img">
+        Kinetic <b>Growth</b>
+      </a>
+      
+      <!-- Desktop Direct Links -->
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link ">Home</a>
+        <a href="services.html" class="nav-link ">Services</a>
+        <a href="results.html" class="nav-link ">Results</a>
+        <a href="why-us.html" class="nav-link ">Why Us</a>
+        <a href="testimonials.html" class="nav-link ">Testimonials</a>
+        <a href="pricing.html" class="nav-link ">Pricing</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- 3-Dot Menu Button -->
+        <button class="three-dots-btn" id="three-dots-toggle" aria-label="Open Options Menu" title="Menu Options">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+        <a href="contact.html" class="btn btn-primary btn-sm desktop-btn-only">Start a Project</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3-Dot Menu Overlay & Dropdown Drawer -->
+  <div class="three-dots-menu-drawer" id="three-dots-drawer">
+    <div class="menu-drawer-header">
+      <div class="menu-title"><i class="fa-solid fa-compass"></i> Navigation Options</div>
+      <button class="menu-close-btn" id="three-dots-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    
+    <div class="menu-drawer-links">
+      <a href="index.html" class="menu-item "><i class="fa-solid fa-house"></i> Home</a>
+      <a href="services.html" class="menu-item "><i class="fa-solid fa-cubes"></i> Services & Capabilities</a>
+      <a href="results.html" class="menu-item "><i class="fa-solid fa-chart-line"></i> Results & Case Studies</a>
+      <a href="why-us.html" class="menu-item "><i class="fa-solid fa-shield-halved"></i> Why Us / Our Model</a>
+      <a href="testimonials.html" class="menu-item "><i class="fa-solid fa-star"></i> Client Testimonials</a>
+      <a href="pricing.html" class="menu-item "><i class="fa-solid fa-calculator"></i> Pricing & ROI Simulator</a>
+      <a href="contact.html" class="menu-item active"><i class="fa-solid fa-calendar-check"></i> Schedule Briefing Call</a>
+    </div>
+
+    <!-- Currency Converter Section in 3-Dot Menu -->
+    <div class="menu-currency-section">
+      <div class="menu-section-label"><i class="fa-solid fa-coins"></i> Select Currency</div>
+      <div class="currency-switch">
+        <button class="currency-btn active" data-currency="INR" onclick="setGlobalCurrency('INR')">INR (₹)</button>
+        <button class="currency-btn" data-currency="USD" onclick="setGlobalCurrency('USD')">USD ($)</button>
+        <button class="currency-btn" data-currency="EUR" onclick="setGlobalCurrency('EUR')">EUR (€)</button>
+        <button class="currency-btn" data-currency="GBP" onclick="setGlobalCurrency('GBP')">GBP (£)</button>
+        <button class="currency-btn" data-currency="AED" onclick="setGlobalCurrency('AED')">AED (د.إ)</button>
+      </div>
+    </div>
+  </div>
+
+
+  <main style="padding-top: 100px; min-height: 85vh;">
+    <section class="section reveal" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge badge-emerald">Let's Talk Growth</div>
+          <h2 class="section-title">Schedule A Free<br><span class="text-gradient">Briefing Call</span></h2>
+          <p class="section-desc">Select a date on our live studio schedule planner and fill out your information to secure a free 30-minute campaign strategy call.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info-col">
+            <div class="contact-info-card">
+              <div class="info-item">
+                <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                <div>
+                  <span class="info-lbl">Phone</span>
+                  <div class="info-val"><a href="tel:+918318797293">+91 83187 97293</a></div>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div>
+                  <span class="info-lbl">Email</span>
+                  <div class="info-val"><a href="mailto:info@kineticgrowth.co.in">info@kineticgrowth.co.in</a></div>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div>
+                  <span class="info-lbl">Studio</span>
+                  <div class="info-val">New Delhi · Remote-first</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Date Selector -->
+            <div class="scheduler-widget">
+              <div class="scheduler-title"><i class="fa-solid fa-calendar-days"></i> Select Call Date</div>
+              <div class="calendar-grid" id="calendar-grid">
+                <!-- Populated via JS -->
+              </div>
+              <div class="scheduler-title"><i class="fa-solid fa-clock"></i> Available Times</div>
+              <div class="time-slots" id="time-slots">
+                <p style="grid-column: span 3; font-size: 12px; color: #64748b; text-align: center; padding: 10px 0;">Please select a date first.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <form class="contact-form" id="contact-form-widget">
+              <!-- Hidden inputs to bind date/time choices -->
+              <input type="hidden" id="booking-date-hidden" required>
+              <input type="hidden" id="booking-time-hidden" required>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="form-name">Full Name</label>
+                  <input type="text" class="form-input" id="form-name" required placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="form-email">Email Address</label>
+                  <input type="email" class="form-input" id="form-email" required placeholder="john@company.com">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="form-company">Company</label>
+                <input type="text" class="form-input" id="form-company" required placeholder="Your Company Name">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="form-service">Required Service</label>
+                <select class="form-input form-select" id="form-service" required>
+                  <option value="" disabled selected>Select a service...</option>
+                  <option value="seo">SEO &amp; Content</option>
+                  <option value="meta">Meta Ads Scaling</option>
+                  <option value="google">Google Ads Campaigns</option>
+                  <option value="web">Web Design &amp; Dev</option>
+                  <option value="ai">AI Operations Automation</option>
+                  <option value="full">Full-Stack Growth Retainer</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="form-goals">Describe Your Goals</label>
+                <textarea class="form-input form-textarea" id="form-goals" required placeholder="Tell us about your product, your current marketing hurdles, and what success looks like in 6 months."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="form-submit-btn">Book My Free Strategy Call <i class="fa-solid fa-calendar-check"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/logo-icon.png" alt="Kinetic Growth Logo" class="logo-img">
+            Kinetic <b>Growth</b>
+          </a>
+          <p class="footer-desc">A performance marketing and AI-systems studio turning attention into measurable, compounding velocity.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+            <li><a href="results.html" class="footer-link">Results</a></li>
+            <li><a href="why-us.html" class="footer-link">Why Us</a></li>
+            <li><a href="testimonials.html" class="footer-link">Testimonials</a></li>
+            <li><a href="pricing.html" class="footer-link">Pricing Calculator</a></li>
+            <li><a href="contact.html" class="footer-link">Contact Briefing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Capabilities</h4>
+          <ul class="footer-links">
+            <li><a href="ai-solutions.html" class="footer-link">AI Automation</a></li>
+            <li><a href="digital-marketing.html" class="footer-link">Meta & Google Ads</a></li>
+            <li><a href="web-app-development.html" class="footer-link">Web & App Dev</a></li>
+            <li><a href="ui-ux-design.html" class="footer-link">UI/UX Design</a></li>
+            <li><a href="software-coding-solutions.html" class="footer-link">Software Solutions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Legal & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="tel:+918318797293" class="footer-link">+91 83187 97293</a></li>
+            <li><a href="mailto:info@kineticgrowth.co.in" class="footer-link">info@kineticgrowth.co.in</a></li>
+            <li><a href="contact.html" class="footer-link">Schedule Meeting</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 Kinetic Growth. All rights reserved.</p>
+        <div class="system-status">
+          <span class="status-dot" style="background: #eccb6c; box-shadow: 0 0 6px #eccb6c;"></span> All systems operational
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

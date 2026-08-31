@@ -2020,7 +2020,27 @@ document.addEventListener('DOMContentLoaded', () => {
     lastTouchEnd = now;
   }, { passive: false });
 
-  document.addEventListener('gesturestart', function(e) {
-    e.preventDefault();
-  }, { passive: false });
+  /* --- 16. Three-Dot Menu Drawer Toggle --- */
+  const threeDotsToggle = document.getElementById('three-dots-toggle');
+  const threeDotsDrawer = document.getElementById('three-dots-drawer');
+  const threeDotsClose = document.getElementById('three-dots-close');
+
+  if (threeDotsToggle && threeDotsDrawer) {
+    threeDotsToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      threeDotsDrawer.classList.toggle('open');
+    });
+
+    if (threeDotsClose) {
+      threeDotsClose.addEventListener('click', () => {
+        threeDotsDrawer.classList.remove('open');
+      });
+    }
+
+    document.addEventListener('click', (e) => {
+      if (!threeDotsDrawer.contains(e.target) && !threeDotsToggle.contains(e.target)) {
+        threeDotsDrawer.classList.remove('open');
+      }
+    });
+  }
 });

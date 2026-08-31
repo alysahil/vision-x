@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <title>Why Us — The Kinetic Growth Model — Kinetic Growth</title>
+  <meta name="description" content="Discover our AI-driven growth approach built for speed, transparency, and high performance.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="assets/logo-icon.png">
+</head>
+<body>
+
+  <canvas id="canvas-backdrop"></canvas>
+  <div class="blob-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  
+  <!-- Header / Navigation Bar with 3-Dot Menu -->
+  <header class="navbar" id="header-nav">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="assets/logo-icon.png" alt="Kinetic Growth Logo" class="logo-img">
+        Kinetic <b>Growth</b>
+      </a>
+      
+      <!-- Desktop Direct Links -->
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link ">Home</a>
+        <a href="services.html" class="nav-link ">Services</a>
+        <a href="results.html" class="nav-link ">Results</a>
+        <a href="why-us.html" class="nav-link active">Why Us</a>
+        <a href="testimonials.html" class="nav-link ">Testimonials</a>
+        <a href="pricing.html" class="nav-link ">Pricing</a>
+        <a href="contact.html" class="nav-link ">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- 3-Dot Menu Button -->
+        <button class="three-dots-btn" id="three-dots-toggle" aria-label="Open Options Menu" title="Menu Options">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+        <a href="contact.html" class="btn btn-primary btn-sm desktop-btn-only">Start a Project</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3-Dot Menu Overlay & Dropdown Drawer -->
+  <div class="three-dots-menu-drawer" id="three-dots-drawer">
+    <div class="menu-drawer-header">
+      <div class="menu-title"><i class="fa-solid fa-compass"></i> Navigation Options</div>
+      <button class="menu-close-btn" id="three-dots-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    
+    <div class="menu-drawer-links">
+      <a href="index.html" class="menu-item "><i class="fa-solid fa-house"></i> Home</a>
+      <a href="services.html" class="menu-item "><i class="fa-solid fa-cubes"></i> Services & Capabilities</a>
+      <a href="results.html" class="menu-item "><i class="fa-solid fa-chart-line"></i> Results & Case Studies</a>
+      <a href="why-us.html" class="menu-item active"><i class="fa-solid fa-shield-halved"></i> Why Us / Our Model</a>
+      <a href="testimonials.html" class="menu-item "><i class="fa-solid fa-star"></i> Client Testimonials</a>
+      <a href="pricing.html" class="menu-item "><i class="fa-solid fa-calculator"></i> Pricing & ROI Simulator</a>
+      <a href="contact.html" class="menu-item "><i class="fa-solid fa-calendar-check"></i> Schedule Briefing Call</a>
+    </div>
+
+    <!-- Currency Converter Section in 3-Dot Menu -->
+    <div class="menu-currency-section">
+      <div class="menu-section-label"><i class="fa-solid fa-coins"></i> Select Currency</div>
+      <div class="currency-switch">
+        <button class="currency-btn active" data-currency="INR" onclick="setGlobalCurrency('INR')">INR (₹)</button>
+        <button class="currency-btn" data-currency="USD" onclick="setGlobalCurrency('USD')">USD ($)</button>
+        <button class="currency-btn" data-currency="EUR" onclick="setGlobalCurrency('EUR')">EUR (€)</button>
+        <button class="currency-btn" data-currency="GBP" onclick="setGlobalCurrency('GBP')">GBP (£)</button>
+        <button class="currency-btn" data-currency="AED" onclick="setGlobalCurrency('AED')">AED (د.إ)</button>
+      </div>
+    </div>
+  </div>
+
+
+  <main style="padding-top: 100px; min-height: 85vh;">
+    <section class="section reveal" id="why-us">
+      <div class="container">
+        <div class="section-header">
+          <div class="badge">The VisionX Model</div>
+          <h2 class="section-title">The Growth Agency Built<br><span class="text-gradient">Differently</span></h2>
+          <p class="section-desc">We cut the typical agency bloat. We prioritize results and transparent communication over slides and presentations.</p>
+        </div>
+
+        <div class="why-grid">
+          <!-- Pillar 1 -->
+          <div class="glass-card why-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content">
+              <div class="why-icon" style="background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.15); color: var(--accent-violet);"><i class="fa-solid fa-brain"></i></div>
+              <h3 class="why-title">AI-Powered Strategy</h3>
+              <p class="why-desc">We use custom artificial intelligence models to audit competitor search footprints, formulate ad variations, and construct targeted marketing plans.</p>
+            </div>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="glass-card why-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content">
+              <div class="why-icon" style="background: rgba(0, 240, 255, 0.08); border: 1px solid rgba(0, 240, 255, 0.15); color: var(--accent-cyan);"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+              <h3 class="why-title">Data-Driven Choices</h3>
+              <p class="why-desc">We verify ad copy variations and landing structures with real conversion metrics. We track over 50 data variables to guide optimization.</p>
+            </div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="glass-card why-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content">
+              <div class="why-icon" style="background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.15); color: var(--accent-emerald);"><i class="fa-solid fa-bolt"></i></div>
+              <h3 class="why-title">Rapid Build Cycles</h3>
+              <p class="why-desc">We set up funnels, write copy, and launch responsive pages quickly, enabling us to gather real customer feedback weeks before traditional agencies.</p>
+            </div>
+          </div>
+
+          <!-- Pillar 4 -->
+          <div class="glass-card why-card spotlight-card">
+            <div class="spotlight-glow"></div>
+            <div class="card-content">
+              <div class="why-icon" style="background: rgba(255, 0, 229, 0.08); border: 1px solid rgba(255, 0, 229, 0.15); color: var(--accent-pink);"><i class="fa-solid fa-shield-halved"></i></div>
+              <h3 class="why-title">Transparent Pipelines</h3>
+              <p class="why-desc">No black-box metrics. You get shared Slack channel access, real-time reports, and direct contact with the project engineers working on your account.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-banner">
+          <div class="cta-banner-content">
+            <h3 class="cta-banner-title">Ready to scale your business <span class="text-gradient-cyan">10x faster?</span></h3>
+            <p class="cta-banner-desc">Get a comprehensive digital strategy roadmap built for your specific product vertical. Entirely free.</p>
+          </div>
+          <div class="cta-banner-btn">
+            <a href="#contact" class="btn btn-primary">Book Strategy Call</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <img src="assets/logo-icon.png" alt="Kinetic Growth Logo" class="logo-img">
+            Kinetic <b>Growth</b>
+          </a>
+          <p class="footer-desc">A performance marketing and AI-systems studio turning attention into measurable, compounding velocity.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+            <li><a href="results.html" class="footer-link">Results</a></li>
+            <li><a href="why-us.html" class="footer-link">Why Us</a></li>
+            <li><a href="testimonials.html" class="footer-link">Testimonials</a></li>
+            <li><a href="pricing.html" class="footer-link">Pricing Calculator</a></li>
+            <li><a href="contact.html" class="footer-link">Contact Briefing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Capabilities</h4>
+          <ul class="footer-links">
+            <li><a href="ai-solutions.html" class="footer-link">AI Automation</a></li>
+            <li><a href="digital-marketing.html" class="footer-link">Meta & Google Ads</a></li>
+            <li><a href="web-app-development.html" class="footer-link">Web & App Dev</a></li>
+            <li><a href="ui-ux-design.html" class="footer-link">UI/UX Design</a></li>
+            <li><a href="software-coding-solutions.html" class="footer-link">Software Solutions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Legal & Contact</h4>
+          <ul class="footer-links">
+            <li><a href="tel:+918318797293" class="footer-link">+91 83187 97293</a></li>
+            <li><a href="mailto:info@kineticgrowth.co.in" class="footer-link">info@kineticgrowth.co.in</a></li>
+            <li><a href="contact.html" class="footer-link">Schedule Meeting</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">© 2026 Kinetic Growth. All rights reserved.</p>
+        <div class="system-status">
+          <span class="status-dot" style="background: #eccb6c; box-shadow: 0 0 6px #eccb6c;"></span> All systems operational
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
