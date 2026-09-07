@@ -1702,16 +1702,17 @@ h1, h2, h3, h4, h5, h6 {
   50% { opacity: 1; }
 }
 
-/* --- Viewport Scroll Trigger Utility --- */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+/* --- Viewport Scroll Trigger Utility (Guaranteed Visible) --- */
+.reveal, .section, .spotlight-card, .service-card, .card-content {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
 }
 
 .reveal.active {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
 }
 
 /* --- Responsive Adaptability --- */
