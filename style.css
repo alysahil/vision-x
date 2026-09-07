@@ -2261,10 +2261,32 @@ body.light-mode .mobile-accordion-content span {
     cursor: pointer;
   }
 
-  .spotlight-card .service-desc {
-    display: none;
-    margin-top: 10px;
-    animation: slideDown 0.3s ease-out;
+  .spotlight-card .service-desc, .service-desc {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin-top: 6px;
+  }
+
+  .deliverables-container {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    margin-bottom: 14px !important;
+    visibility: visible !important;
+  }
+
+  .deliverable-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    font-size: 11px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #cbd5e1 !important;
+    padding: 4px 10px !important;
+    border-radius: 6px !important;
+    visibility: visible !important;
   }
 
 /* ==========================================================================
