@@ -101,30 +101,48 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Global currency syncing across all calculators and lists
+    window.activeCurrency = localStorage.getItem('activeCurrency') || 'INR';
+
+  const currencyRates = {
+    INR: { rate: 1.0, symbol: '₹', locale: 'en-IN' },
+    USD: { rate: 1 / 40, symbol: '$', locale: 'en-US' },
+    EUR: { rate: 1 / 45, symbol: '€', locale: 'de-DE' },
+    GBP: { rate: 1 / 52, symbol: '£', locale: 'en-GB' },
+    AED: { rate: 1 / 11, symbol: 'AED ', locale: 'ar-AE' }
+  };
+
+  function convertPrice(priceStr, currency) {
+    if (!priceStr) return priceStr;
+    const config = currencyRates[currency] || currencyRates.INR;
+    if (currency === 'INR') return priceStr;
+    return priceStr.replace(/₹([\d,]+)/g, (match, p1) => {
+      const inrVal = parseFloat(p1.replace(/,/g, ''));
+      const converted = Math.round(inrVal * config.rate);
+      return config.symbol + converted.toLocaleString(config.locale);
+    });
+  }
+
   window.setGlobalCurrency = function(currency) {
-    activeCurrency = currency;
-    
-    // Sync button classes in DOM
+    window.activeCurrency = currency;
+    localStorage.setItem('activeCurrency', currency);
+
     document.querySelectorAll('.currency-btn').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-currency') === currency);
     });
-    
-    // Save to localStorage so it stays active across pages
-    localStorage.setItem('activeCurrency', currency);
-    
-    // Re-render services grid if present
-    if (typeof renderServices === 'function') renderServices();
-    
-    // Re-render calculator if present
-    if (typeof updateRetainerCalculator === 'function') updateRetainerCalculator();
-    if (typeof updateInvoiceCalculator === 'function') updateInvoiceCalculator();
-  };
 
-  // On page load, read currency from localStorage
-  const savedCurrency = localStorage.getItem('activeCurrency') || 'INR';
-  setTimeout(() => {
-    window.setGlobalCurrency(savedCurrency);
-  }, 100);
+    if (typeof renderServices === 'function') {
+      try { renderServices(); } catch(e) {}
+    }
+
+    document.querySelectorAll('.convertible-price, [data-inr-price]').forEach(el => {
+      const orig = el.getAttribute('data-inr-price') || el.textContent;
+      if (!el.getAttribute('data-inr-price')) el.setAttribute('data-inr-price', orig);
+      el.textContent = convertPrice(orig, currency);
+    });
+
+    if (typeof updateRetainerCalculator === 'function') try { updateRetainerCalculator(); } catch(e) {}
+    if (typeof updateInvoiceCalculator === 'function') try { updateInvoiceCalculator(); } catch(e) {}
+  };
 
   /* --- 2. Spotlight Hover Card Effect --- */
   const initSpotlightCard = (card) => {
@@ -2607,6 +2625,30 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+    /* --- Event-Delegated Mobile Accordion Card Click Handler --- */
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.accordion-card, .spotlight-card');
+    if (!card) return;
+
+    if (e.target.tagName === 'A' || e.target.closest('a') || e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+      return;
+    }
+
+    const isActive = card.classList.contains('active') || card.classList.contains('mobile-expanded');
+
+    if (window.innerWidth <= 768) {
+      document.querySelectorAll('.accordion-card, .spotlight-card').forEach(c => {
+        if (c !== card) {
+          c.classList.remove('active');
+          c.classList.remove('mobile-expanded');
+        }
+      });
+    }
+
+    card.classList.toggle('active', !isActive);
+    card.classList.toggle('mobile-expanded', !isActive);
+  });
 
   /* --- 17. Explicit Accordion Card Click Handler --- */
   const accordionCards = document.querySelectorAll('.accordion-card');
