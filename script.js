@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(167, 190, 202, 0.5)';
+        ctx.fillStyle = 'rgba(201, 162, 39, 0.4)';
         ctx.fill();
       }
     }
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.moveTo(points[i].x, points[i].y);
             ctx.lineTo(points[j].x, points[j].y);
             const alpha = (maxDistance - dist) / maxDistance * 0.15;
-            ctx.strokeStyle = `rgba(214, 224, 232, ${alpha})`;
+            ctx.strokeStyle = `rgba(236, 203, 108, ${alpha})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
