@@ -1702,17 +1702,26 @@ h1, h2, h3, h4, h5, h6 {
   50% { opacity: 1; }
 }
 
-/* --- Viewport Scroll Trigger Utility (Guaranteed Visible) --- */
-.reveal, .section, .spotlight-card, .service-card, .card-content {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
+/* --- Viewport Scroll Trigger Utility & Motion Animations --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .reveal.active {
   opacity: 1 !important;
-  transform: none !important;
+  transform: translateY(0) !important;
   visibility: visible !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* --- Responsive Adaptability --- */

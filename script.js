@@ -1,5 +1,86 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    /* ==========================================================================
+     MOTION API 60FPS SPRING ANIMATIONS, SCROLL PROGRESS & VIEWPORT REVEALS
+     ========================================================================== */
+  const progressBar = document.getElementById('motion-scroll-progress');
+  if (progressBar) {
+    progressBar.style.transformOrigin = '0% 50%';
+  }
+  
+  const updateScrollProgress = () => {
+    if (!progressBar) return;
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = totalHeight > 0 ? (window.scrollY / totalHeight) : 0;
+    progressBar.style.transform = `scaleX(${Math.min(Math.max(progress, 0), 1)})`;
+  };
+  window.addEventListener('scroll', updateScrollProgress, { passive: true });
+  updateScrollProgress();
+
+  const initMotionAnimations = () => {
+    const motionLib = window.Motion || window.motion;
+
+    // Trigger initial reveal for visible elements on page load
+    document.querySelectorAll('.reveal').forEach((el, idx) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9) {
+        setTimeout(() => el.classList.add('active'), idx * 80);
+      }
+    });
+
+    if (motionLib && motionLib.animate) {
+      console.log('⚡ Motion API Engine Active');
+
+      // Spring Hover Interactions
+      const interactiveTargets = '.btn-primary, .btn-secondary, .three-dots-btn, .logo-img, .glass-card, .spotlight-card, .pricing-card, .why-card, .whatsapp-float';
+      document.querySelectorAll(interactiveTargets).forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          try {
+            motionLib.animate(el, { scale: 1.03, y: -4 }, { type: 'spring', stiffness: 380, damping: 22 });
+          } catch(e) { el.style.transform = 'translateY(-4px) scale(1.03)'; }
+        });
+        el.addEventListener('mouseleave', () => {
+          try {
+            motionLib.animate(el, { scale: 1.0, y: 0 }, { type: 'spring', stiffness: 380, damping: 22 });
+          } catch(e) { el.style.transform = 'translateY(0) scale(1.0)'; }
+        });
+      });
+
+      // Viewport Reveal InView
+      if (motionLib.inView) {
+        motionLib.inView('.reveal, .spotlight-card, .why-card, .testimonial-card, .pricing-card, .section-header', ({ target }) => {
+          target.classList.add('active');
+          try {
+            motionLib.animate(
+              target,
+              { opacity: [0, 1], y: [35, 0] },
+              { duration: 0.6, easing: [0.16, 1, 0.3, 1] }
+            );
+          } catch(e) {}
+        });
+      }
+    } else {
+      console.log('Fallback Standard Animations Active');
+      document.querySelectorAll('.btn-primary, .btn-secondary, .three-dots-btn, .glass-card').forEach(el => {
+        el.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+        el.addEventListener('mouseenter', () => { el.style.transform = 'translateY(-4px) scale(1.03)'; });
+        el.addEventListener('mouseleave', () => { el.style.transform = 'translateY(0) scale(1.0)'; });
+      });
+    }
+
+    // Fail-safe visibility timer (1.0s max delay)
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach(r => r.classList.add('active'));
+    }, 1000);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMotionAnimations);
+  } else {
+    initMotionAnimations();
+  }
+
+
   /* --- 1. Canvas Particles Backdrop --- */
   const canvas = document.getElementById('canvas-backdrop');
   if (canvas) {
@@ -1214,24 +1295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  const currencyRates = {
-    INR: { rate: 1.0, symbol: '₹', locale: 'en-IN' },
-    USD: { rate: 1 / 40, symbol: '$', locale: 'en-US' },
-    EUR: { rate: 1 / 45, symbol: '€', locale: 'de-DE' },
-    GBP: { rate: 1 / 52, symbol: '£', locale: 'en-GB' },
-    AED: { rate: 1 / 11, symbol: 'AED ', locale: 'ar-AE' }
-  };
-
-  // Parser and converter for multi-currency values
-  function convertPrice(priceStr, currency) {
-    const config = currencyRates[currency] || currencyRates.INR;
-    if (currency === 'INR') return priceStr;
-    return priceStr.replace(/₹([\d,]+)/g, (match, p1) => {
-      const inrVal = parseFloat(p1.replace(/,/g, ''));
-      const converted = Math.round(inrVal * config.rate);
-      return config.symbol + converted.toLocaleString(config.locale);
-    });
-  }
+  /* currencyRates and convertPrice declared once at top */
 
     const descriptions_map = {
   "AI Automation": {
