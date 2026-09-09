@@ -3089,3 +3089,16 @@ html, body {
   box-shadow: 0 0 30px rgba(37, 211, 102, 0.8);
   color: #fff;
 }
+/* Motion Top Scroll Progress Bar */
+#motion-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #c9a227 0%, #eccb6c 50%, #00f0ff 100%);
+  transform-origin: 0% 50%;
+  transform: scaleX(0);
+  z-index: 999999;
+  box-shadow: 0 0 12px #eccb6c;
+}
