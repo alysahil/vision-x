@@ -2654,17 +2654,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initMobileAccordions();
 
-  /* --- 15. Strict Mobile Anti-Zoom Event Listeners --- */
-  let lastTouchEnd = 0;
-  document.addEventListener('touchend', function(e) {
-    const now = (new Date()).getTime();
-    if (now - lastTouchEnd <= 300) {
-      if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
-        e.preventDefault();
-      }
-    }
-    lastTouchEnd = now;
-  }, { passive: false });
+  /* Anti-zoom listener removed for 100% smooth mobile link navigation */
 
   /* --- 16. Three-Dot Menu Drawer Toggle --- */
   const threeDotsToggle = document.getElementById('three-dots-toggle');
@@ -2714,21 +2704,32 @@ document.addEventListener('DOMContentLoaded', () => {
     card.classList.toggle('mobile-expanded', !isActive);
   });
 
-  /* --- 17. Explicit Accordion Card Click Handler --- */
-  const accordionCards = document.querySelectorAll('.accordion-card');
-  accordionCards.forEach(card => {
-    card.addEventListener('click', (e) => {
-      if (e.target.tagName === 'A' || e.target.closest('a')) return;
+    /* --- Direct Mobile Service Card & Menu Link Navigation --- */
+  document.querySelectorAll('.accordion-card, .spotlight-card[data-category]').forEach(card => {
+    const link = card.querySelector('a[href]');
+    if (link) {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', (e) => {
+        // If user tapped outside an anchor tag, trigger direct navigation to target subpage
+        if (e.target.tagName !== 'A' && !e.target.closest('a')) {
+          const href = link.getAttribute('href');
+          if (href && href !== '#') {
+            window.location.href = href;
+          }
+        }
+      });
+    }
+  });
 
-      const isActive = card.classList.contains('active');
-
-      if (window.innerWidth <= 768) {
-        accordionCards.forEach(c => {
-          if (c !== card) c.classList.remove('active');
-        });
+  // Explicit drawer menu item tap navigation
+  document.querySelectorAll('.three-dots-menu-drawer .menu-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      const href = item.getAttribute('href');
+      if (href && href !== '#') {
+        const drawer = document.getElementById('three-dots-drawer');
+        if (drawer) drawer.classList.remove('open');
+        window.location.href = href;
       }
-
-      card.classList.toggle('active', !isActive);
     });
   });
 
