@@ -2629,124 +2629,70 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* --- 14. Mobile Category Accordion Functionality --- */
-  function initMobileAccordions() {
-    const spotlightCards = document.querySelectorAll('.spotlight-card');
-    spotlightCards.forEach(card => {
-      const titleEl = card.querySelector('.service-title');
-      const descEl = card.querySelector('.service-desc');
-      if (!titleEl || !descEl) return;
-      
+    /* ==========================================================================
+     UNIFIED MOBILE CARD ACCORDION & DRAWER ACCORDION ENGINE
+     ========================================================================== */
+  const initAllAccordions = () => {
+    // 1. Mobile Service Card Accordion Toggle
+    const cards = document.querySelectorAll('.accordion-card, .spotlight-card');
+    
+    // Auto-expand 1st card on mobile for visual guide
+    if (window.innerWidth <= 768 && cards.length > 0) {
+      cards[0].classList.add('active', 'mobile-expanded');
+    }
+
+    cards.forEach(card => {
       card.addEventListener('click', (e) => {
-        if (window.innerWidth >= 768) return; // Mobile view only
-        if (e.target.tagName === 'A' || e.target.closest('a')) return;
+        // If user explicitly clicked the subpage link button inside the body, allow navigation
+        if (e.target.tagName === 'A' || e.target.closest('a') || e.target.classList.contains('btn') || e.target.closest('.btn')) {
+          const btnLink = e.target.tagName === 'A' ? e.target : e.target.closest('a');
+          if (btnLink && btnLink.getAttribute('href')) {
+            window.location.href = btnLink.getAttribute('href');
+          }
+          return;
+        }
+
+        // On mobile viewports (<= 768px), toggle expand/collapse state
+        if (window.innerWidth <= 768) {
+          const isCurrentlyActive = card.classList.contains('active') || card.classList.contains('mobile-expanded');
+
+          // Close other cards for clean single-accordion behavior
+          cards.forEach(c => {
+            if (c !== card) {
+              c.classList.remove('active', 'mobile-expanded');
+            }
+          });
+
+          // Toggle current card
+          card.classList.toggle('active', !isCurrentlyActive);
+          card.classList.toggle('mobile-expanded', !isCurrentlyActive);
+        }
+      });
+    });
+
+    // 2. 3-Dot Drawer Accordion Toggle
+    const navAccordionHeaders = document.querySelectorAll('.nav-accordion-header');
+    navAccordionHeaders.forEach(header => {
+      header.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const item = header.closest('.nav-accordion-item');
+        if (!item) return;
         
-        const isExpanded = card.classList.contains('mobile-expanded');
+        const isOpen = item.classList.contains('open');
         
-        document.querySelectorAll('.spotlight-card.mobile-expanded').forEach(c => {
-          if (c !== card) c.classList.remove('mobile-expanded');
+        document.querySelectorAll('.nav-accordion-item').forEach(i => {
+          if (i !== item) i.classList.remove('open');
         });
 
-        card.classList.toggle('mobile-expanded', !isExpanded);
+        item.classList.toggle('open', !isOpen);
       });
     });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAllAccordions);
+  } else {
+    initAllAccordions();
   }
 
-  initMobileAccordions();
-
-  /* Anti-zoom listener removed for 100% smooth mobile link navigation */
-
-  /* --- 16. Three-Dot Menu Drawer Toggle --- */
-  const threeDotsToggle = document.getElementById('three-dots-toggle');
-  const threeDotsDrawer = document.getElementById('three-dots-drawer');
-  const threeDotsClose = document.getElementById('three-dots-close');
-
-  if (threeDotsToggle && threeDotsDrawer) {
-    threeDotsToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      threeDotsDrawer.classList.toggle('open');
-    });
-
-    if (threeDotsClose) {
-      threeDotsClose.addEventListener('click', () => {
-        threeDotsDrawer.classList.remove('open');
-      });
-    }
-
-    document.addEventListener('click', (e) => {
-      if (!threeDotsDrawer.contains(e.target) && !threeDotsToggle.contains(e.target)) {
-        threeDotsDrawer.classList.remove('open');
-      }
-    });
-  }
-
-    /* --- Event-Delegated Mobile Accordion Card Click Handler --- */
-  document.addEventListener('click', (e) => {
-    const card = e.target.closest('.accordion-card, .spotlight-card');
-    if (!card) return;
-
-    if (e.target.tagName === 'A' || e.target.closest('a') || e.target.tagName === 'BUTTON' || e.target.closest('button')) {
-      return;
-    }
-
-    const isActive = card.classList.contains('active') || card.classList.contains('mobile-expanded');
-
-    if (window.innerWidth <= 768) {
-      document.querySelectorAll('.accordion-card, .spotlight-card').forEach(c => {
-        if (c !== card) {
-          c.classList.remove('active');
-          c.classList.remove('mobile-expanded');
-        }
-      });
-    }
-
-    card.classList.toggle('active', !isActive);
-    card.classList.toggle('mobile-expanded', !isActive);
-  });
-
-    /* --- Direct Mobile Service Card & Menu Link Navigation --- */
-  document.querySelectorAll('.accordion-card, .spotlight-card[data-category]').forEach(card => {
-    const link = card.querySelector('a[href]');
-    if (link) {
-      card.style.cursor = 'pointer';
-      card.addEventListener('click', (e) => {
-        // If user tapped outside an anchor tag, trigger direct navigation to target subpage
-        if (e.target.tagName !== 'A' && !e.target.closest('a')) {
-          const href = link.getAttribute('href');
-          if (href && href !== '#') {
-            window.location.href = href;
-          }
-        }
-      });
-    }
-  });
-
-  // Explicit drawer menu item tap navigation
-  document.querySelectorAll('.three-dots-menu-drawer .menu-item').forEach(item => {
-    item.addEventListener('click', (e) => {
-      const href = item.getAttribute('href');
-      if (href && href !== '#') {
-        const drawer = document.getElementById('three-dots-drawer');
-        if (drawer) drawer.classList.remove('open');
-        window.location.href = href;
-      }
-    });
-  });
-
-  /* --- 18. Drawer Accordion Navigation Toggle --- */
-  const navAccordionHeaders = document.querySelectorAll('.nav-accordion-header');
-  navAccordionHeaders.forEach(header => {
-    header.addEventListener('click', () => {
-      const item = header.closest('.nav-accordion-item');
-      if (!item) return;
-      
-      const isOpen = item.classList.contains('open');
-      
-      document.querySelectorAll('.nav-accordion-item').forEach(i => {
-        if (i !== item) i.classList.remove('open');
-      });
-
-      item.classList.toggle('open', !isOpen);
-    });
-  });
 });

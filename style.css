@@ -2578,7 +2578,48 @@ html, body {
   transition: all 0.3s ease-out;
 }
 
-  /* Mobile Service Cards: Always Visible & Tap-Ready */
+  /* Mobile Service Card Accordion System */
+@media (max-width: 768px) {
+  .accordion-toggle-icon {
+    display: flex !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(201, 162, 39, 0.25) !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 13px !important;
+    color: #eccb6c !important;
+    transition: transform 0.3s ease, background 0.3s ease !important;
+  }
+
+  .accordion-content-body {
+    display: none !important;
+    margin-top: 14px !important;
+    padding-top: 14px !important;
+    border-top: 1px solid rgba(201, 162, 39, 0.15) !important;
+  }
+
+  .accordion-card.active .accordion-content-body,
+  .accordion-card.mobile-expanded .accordion-content-body {
+    display: block !important;
+    animation: fadeInSlide 0.3s ease-out !important;
+  }
+
+  .accordion-card.active .accordion-toggle-icon,
+  .accordion-card.mobile-expanded .accordion-toggle-icon {
+    transform: rotate(180deg) !important;
+    background: rgba(201, 162, 39, 0.25) !important;
+    color: #fef08a !important;
+    border-color: #eccb6c !important;
+  }
+
+  .accordion-card {
+    cursor: pointer !important;
+    touch-action: manipulation !important;
+  }
+}
   @media (max-width: 768px) {
   .accordion-content-body {
     display: block !important;
