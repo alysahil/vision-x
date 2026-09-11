@@ -2695,4 +2695,82 @@ document.addEventListener('DOMContentLoaded', () => {
     initAllAccordions();
   }
 
+
+
+/* ==========================================================================
+   THREE-DOT MOBILE MENU DRAWER TOGGLE ENGINE & CURRENCY SYSTEM
+   ========================================================================== */
+window.activeCurrency = localStorage.getItem('activeCurrency') || 'INR';
+
+/* Using global currencyRates declared at top */
+
+window.setGlobalCurrency = function(currency) {
+  if (!currencyRates[currency]) return;
+  window.activeCurrency = currency;
+  localStorage.setItem('activeCurrency', currency);
+
+  // Update active state on all currency buttons
+  document.querySelectorAll('.currency-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-currency') === currency);
+  });
+
+  // Convert prices on current page
+  const config = currencyRates[currency];
+  document.querySelectorAll('.price-val, .calc-out-val, .sub-price').forEach(el => {
+    const rawInr = el.getAttribute('data-inr') || el.textContent.replace(/[^0-9]/g, '');
+    if (rawInr) {
+      if (!el.getAttribute('data-inr')) el.setAttribute('data-inr', rawInr);
+      const val = parseFloat(rawInr);
+      if (currency === 'INR') {
+        el.textContent = '₹' + Math.round(val).toLocaleString('en-IN');
+      } else {
+        const converted = Math.round(val * config.rate);
+        el.textContent = config.symbol + converted.toLocaleString(config.locale);
+      }
+    }
+  });
+};
+
+const initThreeDotsDrawer = () => {
+  const toggleBtn = document.getElementById('three-dots-toggle');
+  const drawer = document.getElementById('three-dots-drawer');
+  const closeBtn = document.getElementById('three-dots-close');
+
+  if (toggleBtn && drawer) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      drawer.classList.toggle('open');
+    });
+  }
+
+  if (closeBtn && drawer) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      drawer.classList.remove('open');
+    });
+  }
+
+  // Close drawer when tapping outside
+  document.addEventListener('click', (e) => {
+    if (drawer && drawer.classList.contains('open')) {
+      if (!drawer.contains(e.target) && toggleBtn && !toggleBtn.contains(e.target)) {
+        drawer.classList.remove('open');
+      }
+    }
+  });
+
+  // Sync active currency button state on load
+  const savedCurrency = localStorage.getItem('activeCurrency') || 'INR';
+  document.querySelectorAll('.currency-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-currency') === savedCurrency);
+  });
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initThreeDotsDrawer);
+} else {
+  initThreeDotsDrawer();
+}
 });
