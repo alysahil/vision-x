@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <title>AI Solutions — Kinetic Growth Capabilities</title>
   <meta name="description" content="Intelligent business automations, custom chatbots, API integrations, and workflow optimizations built to reduce manual labor.">
-  <link rel="stylesheet" href="style.css?v=24.0">
+  <link rel="stylesheet" href="style.css?v=25.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="assets/logo-icon.png">
 <style>
@@ -62,7 +62,7 @@
 
       <div class="nav-actions">
         <!-- 3-Dot Options Drawer Toggle -->
-        <button class="three-dots-btn" id="three-dots-toggle" aria-label="Open Navigation Options" title="Menu Options">
+        <button class="three-dots-btn" id="three-dots-toggle" onclick="window.toggleThreeDotsDrawer(event)" aria-label="Open Navigation Options" title="Menu Options">
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
         <a href="contact.html" class="btn btn-primary btn-sm">Start a Project</a>
@@ -70,17 +70,17 @@
     </div>
   </header>
 
-      <!-- 3-Dot Options Dropdown Drawer -->
+        <!-- 3-Dot Options Dropdown Drawer -->
   <div class="three-dots-menu-drawer" id="three-dots-drawer" style="position: fixed !important; top: 0 !important; right: -420px !important; width: 360px !important; max-width: 88vw !important; height: 100vh !important; height: 100dvh !important; background: #0b0b12 !important; border-left: 1px solid rgba(201, 162, 39, 0.3) !important; backdrop-filter: blur(30px) !important; -webkit-backdrop-filter: blur(30px) !important; z-index: 999999 !important; display: flex !important; flex-direction: column !important; padding: 20px 16px !important; transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important; box-shadow: -20px 0 60px rgba(0, 0, 0, 0.85) !important; overflow-y: auto !important;">
     <div class="menu-drawer-header" style="display: flex !important; align-items: center !important; justify-content: space-between !important; padding-bottom: 16px !important; border-bottom: 1px solid rgba(201, 162, 39, 0.2) !important; margin-bottom: 16px !important; width: 100% !important;">
       <div class="menu-title" style="font-family: 'Space Grotesk', sans-serif !important; font-size: 14px !important; font-weight: 700 !important; color: #eccb6c !important; text-transform: uppercase !important; letter-spacing: 0.08em !important; display: flex !important; align-items: center !important; gap: 10px !important;"><i class="fa-solid fa-compass" style="color: #c9a227;"></i> Navigation Options</div>
-      <button class="menu-close-btn" id="three-dots-close" aria-label="Close Menu" style="width: 38px !important; height: 38px !important; border-radius: 50% !important; background: rgba(255, 255, 255, 0.08) !important; border: 1px solid rgba(255, 255, 255, 0.2) !important; color: #f1f5f9 !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; font-size: 24px !important; line-height: 1 !important;">&times;</button>
+      <button class="menu-close-btn" id="three-dots-close" onclick="window.closeThreeDotsDrawer(event)" aria-label="Close Menu" style="width: 38px !important; height: 38px !important; border-radius: 50% !important; background: rgba(255, 255, 255, 0.08) !important; border: 1px solid rgba(255, 255, 255, 0.2) !important; color: #f1f5f9 !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; font-size: 24px !important; line-height: 1 !important;">&times;</button>
     </div>
     
     <div class="menu-drawer-links" style="display: flex !important; flex-direction: column !important; gap: 8px !important; flex: 1 !important; width: 100% !important;">
       <!-- Accordion Section 1: Main Pages -->
       <div class="nav-accordion-item open" style="border: 1px solid rgba(201, 162, 39, 0.4) !important; background: rgba(15, 15, 24, 0.95) !important; border-radius: 14px !important; margin-bottom: 10px !important; overflow: hidden !important; width: 100% !important;">
-        <div class="nav-accordion-header" style="display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 14px 16px !important; cursor: pointer !important; color: #eccb6c !important; font-family: 'Space Grotesk', sans-serif !important; font-size: 13px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; width: 100% !important;">
+        <div class="nav-accordion-header" onclick="window.toggleNavAccordion(this)" style="display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 14px 16px !important; cursor: pointer !important; color: #eccb6c !important; font-family: 'Space Grotesk', sans-serif !important; font-size: 13px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; width: 100% !important;">
           <span style="display: flex !important; align-items: center !important; gap: 10px !important;"><i class="fa-solid fa-house" style="color: #c9a227;"></i> Main Pages</span>
           <i class="fa-solid fa-chevron-down nav-accordion-arrow" style="font-size: 12px !important; color: #eccb6c !important; transform: rotate(180deg) !important;"></i>
         </div>
@@ -96,7 +96,7 @@
 
       <!-- Accordion Section 2: Service Categories (11 Pillars) -->
       <div class="nav-accordion-item" style="border: 1px solid rgba(255, 255, 255, 0.1) !important; background: rgba(22, 21, 27, 0.6) !important; border-radius: 14px !important; margin-bottom: 10px !important; overflow: hidden !important; width: 100% !important;">
-        <div class="nav-accordion-header" style="display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 14px 16px !important; cursor: pointer !important; color: #eccb6c !important; font-family: 'Space Grotesk', sans-serif !important; font-size: 13px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; width: 100% !important;">
+        <div class="nav-accordion-header" onclick="window.toggleNavAccordion(this)" style="display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 14px 16px !important; cursor: pointer !important; color: #eccb6c !important; font-family: 'Space Grotesk', sans-serif !important; font-size: 13px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; width: 100% !important;">
           <span style="display: flex !important; align-items: center !important; gap: 10px !important;"><i class="fa-solid fa-cubes" style="color: #c9a227;"></i> Service Categories</span>
           <i class="fa-solid fa-chevron-down nav-accordion-arrow" style="font-size: 12px !important; color: #94a3b8 !important;"></i>
         </div>
@@ -118,20 +118,22 @@
 
       <!-- Accordion Section 3: Currency Switcher -->
       <div class="nav-accordion-item" style="border: 1px solid rgba(255, 255, 255, 0.1) !important; background: rgba(22, 21, 27, 0.6) !important; border-radius: 14px !important; margin-bottom: 10px !important; overflow: hidden !important; width: 100% !important;">
-        <div class="nav-accordion-header" style="display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 14px 16px !important; cursor: pointer !important; color: #eccb6c !important; font-family: 'Space Grotesk', sans-serif !important; font-size: 13px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; width: 100% !important;">
+        <div class="nav-accordion-header" onclick="window.toggleNavAccordion(this)" style="display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 14px 16px !important; cursor: pointer !important; color: #eccb6c !important; font-family: 'Space Grotesk', sans-serif !important; font-size: 13px !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.05em !important; width: 100% !important;">
           <span style="display: flex !important; align-items: center !important; gap: 10px !important;"><i class="fa-solid fa-coins" style="color: #c9a227;"></i> Currency Settings</span>
           <i class="fa-solid fa-chevron-down nav-accordion-arrow" style="font-size: 12px !important; color: #94a3b8 !important;"></i>
         </div>
         <div class="nav-accordion-body" style="display: none !important; flex-direction: column !important; gap: 6px !important; padding: 10px 12px 14px 12px !important; border-top: 1px solid rgba(255, 255, 255, 0.08) !important; width: 100% !important;">
           <div class="currency-switch" style="display: grid !important; grid-template-columns: repeat(3, 1fr) !important; gap: 6px !important; width: 100% !important;">
-            <button class="currency-btn active" data-currency="INR" onclick="setGlobalCurrency('INR')">INR (₹)</button>
-            <button class="currency-btn" data-currency="USD" onclick="setGlobalCurrency('USD')">USD ($)</button>
-            <button class="currency-btn" data-currency="EUR" onclick="setGlobalCurrency('EUR')">EUR (€)</button>
-            <button class="currency-btn" data-currency="GBP" onclick="setGlobalCurrency('GBP')">GBP (£)</button>
-            <button class="currency-btn" data-currency="AED" onclick="setGlobalCurrency('AED')">AED (د.إ)</button>
+            <button class="currency-btn active" data-currency="INR" onclick="window.setGlobalCurrency('INR')">INR (₹)</button>
+            <button class="currency-btn" data-currency="USD" onclick="window.setGlobalCurrency('USD')">USD ($)</button>
+            <button class="currency-btn" data-currency="EUR" onclick="window.setGlobalCurrency('EUR')">EUR (€)</button>
+            <button class="currency-btn" data-currency="GBP" onclick="window.setGlobalCurrency('GBP')">GBP (£)</button>
+            <button class="currency-btn" data-currency="AED" onclick="window.setGlobalCurrency('AED')">AED (د.إ)</button>
           </div>
         </div>
       </div>
+    </div>
+  </div>
     </div>
   </div>
     </div>

@@ -1,3 +1,73 @@
+/* ==========================================================================
+   BULLETPROOF GLOBAL 3-DOT DRAWER & CURRENCY ENGINE (TOP SCOPE)
+   ========================================================================== */
+window.activeCurrency = localStorage.getItem('activeCurrency') || 'INR';
+
+window.toggleThreeDotsDrawer = function(e) {
+  if (e) {
+    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+    if (typeof e.preventDefault === 'function') e.preventDefault();
+  }
+  const drawer = document.getElementById('three-dots-drawer');
+  if (drawer) {
+    drawer.classList.toggle('open');
+  }
+};
+
+window.closeThreeDotsDrawer = function(e) {
+  if (e) {
+    if (typeof e.stopPropagation === 'function') e.stopPropagation();
+    if (typeof e.preventDefault === 'function') e.preventDefault();
+  }
+  const drawer = document.getElementById('three-dots-drawer');
+  if (drawer) {
+    drawer.classList.remove('open');
+  }
+};
+
+window.toggleNavAccordion = function(headerEl) {
+  if (!headerEl) return;
+  const item = headerEl.closest('.nav-accordion-item');
+  if (!item) return;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.nav-accordion-item').forEach(i => {
+    if (i !== item) i.classList.remove('open');
+  });
+  item.classList.toggle('open', !isOpen);
+};
+
+window.setGlobalCurrency = function(currency) {
+  const currencyRates = {
+    INR: { rate: 1.0, symbol: '₹', locale: 'en-IN' },
+    USD: { rate: 1 / 40, symbol: '$', locale: 'en-US' },
+    EUR: { rate: 1 / 45, symbol: '€', locale: 'de-DE' },
+    GBP: { rate: 1 / 52, symbol: '£', locale: 'en-GB' },
+    AED: { rate: 1 / 11, symbol: 'AED ', locale: 'ar-AE' }
+  };
+  if (!currencyRates[currency]) return;
+  window.activeCurrency = currency;
+  localStorage.setItem('activeCurrency', currency);
+
+  document.querySelectorAll('.currency-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-currency') === currency);
+  });
+
+  const config = currencyRates[currency];
+  document.querySelectorAll('.price-val, .calc-out-val, .sub-price').forEach(el => {
+    const rawInr = el.getAttribute('data-inr') || el.textContent.replace(/[^0-9]/g, '');
+    if (rawInr) {
+      if (!el.getAttribute('data-inr')) el.setAttribute('data-inr', rawInr);
+      const val = parseFloat(rawInr);
+      if (currency === 'INR') {
+        el.textContent = '₹' + Math.round(val).toLocaleString('en-IN');
+      } else {
+        const converted = Math.round(val * config.rate);
+        el.textContent = config.symbol + converted.toLocaleString(config.locale);
+      }
+    }
+  });
+};
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ==========================================================================
