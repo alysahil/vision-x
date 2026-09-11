@@ -2620,21 +2620,7 @@ html, body {
     touch-action: manipulation !important;
   }
 }
-  @media (max-width: 768px) {
-  .accordion-content-body {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    margin-top: 12px;
-  }
-  .accordion-toggle-icon {
-    display: none !important;
-  }
-  .accordion-card {
-    cursor: pointer;
-    touch-action: manipulation;
-  }
-  }
+
 
 @keyframes fadeInSlide {
   from {
@@ -3380,5 +3366,32 @@ html, body {
 @media (max-width: 1024px) {
   .nav-menu {
     display: none !important;
+  }
+}
+
+
+/* ==========================================================================
+   EXPLICIT DESKTOP VS MOBILE HEADER & 3-DOT DRAWER ACCORDION SYSTEM
+   ========================================================================== */
+
+/* Desktop View (min-width: 1025px) */
+@media (min-width: 1025px) {
+  .nav-menu {
+    display: flex !important;
+    align-items: center;
+    gap: 4px;
+  }
+  .three-dots-btn {
+    display: none !important;
+  }
+}
+
+/* Mobile & Tablet View (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .nav-menu {
+    display: none !important;
+  }
+  .three-dots-btn {
+    display: inline-flex !important;
   }
 }
