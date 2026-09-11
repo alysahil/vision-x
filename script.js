@@ -10,7 +10,14 @@ window.toggleThreeDotsDrawer = function(e) {
   }
   const drawer = document.getElementById('three-dots-drawer');
   if (drawer) {
-    drawer.classList.toggle('open');
+    const isCurrentlyOpen = drawer.classList.contains('open') || drawer.style.right === '0px';
+    if (isCurrentlyOpen) {
+      drawer.classList.remove('open');
+      drawer.style.setProperty('right', '-420px', 'important');
+    } else {
+      drawer.classList.add('open');
+      drawer.style.setProperty('right', '0px', 'important');
+    }
   }
 };
 
@@ -22,6 +29,7 @@ window.closeThreeDotsDrawer = function(e) {
   const drawer = document.getElementById('three-dots-drawer');
   if (drawer) {
     drawer.classList.remove('open');
+    drawer.style.setProperty('right', '-420px', 'important');
   }
 };
 
@@ -30,10 +38,24 @@ window.toggleNavAccordion = function(headerEl) {
   const item = headerEl.closest('.nav-accordion-item');
   if (!item) return;
   const isOpen = item.classList.contains('open');
+  
+  // Close all accordion items and reset their body display & arrow rotation
   document.querySelectorAll('.nav-accordion-item').forEach(i => {
-    if (i !== item) i.classList.remove('open');
+    i.classList.remove('open');
+    const body = i.querySelector('.nav-accordion-body');
+    if (body) body.style.setProperty('display', 'none', 'important');
+    const arrow = i.querySelector('.nav-accordion-arrow');
+    if (arrow) arrow.style.setProperty('transform', 'rotate(0deg)', 'important');
   });
-  item.classList.toggle('open', !isOpen);
+
+  // Expand target accordion item if it was closed
+  if (!isOpen) {
+    item.classList.add('open');
+    const body = item.querySelector('.nav-accordion-body');
+    if (body) body.style.setProperty('display', 'flex', 'important');
+    const arrow = item.querySelector('.nav-accordion-arrow');
+    if (arrow) arrow.style.setProperty('transform', 'rotate(180deg)', 'important');
+  }
 };
 
 window.setGlobalCurrency = function(currency) {
@@ -53,8 +75,8 @@ window.setGlobalCurrency = function(currency) {
   });
 
   const config = currencyRates[currency];
-  document.querySelectorAll('.price-val, .calc-out-val, .sub-price').forEach(el => {
-    const rawInr = el.getAttribute('data-inr') || el.textContent.replace(/[^0-9]/g, '');
+  document.querySelectorAll('.price-val, .calc-out-val, .sub-price, .convertible-price, [data-inr-price]').forEach(el => {
+    const rawInr = el.getAttribute('data-inr') || el.getAttribute('data-inr-price') || el.textContent.replace(/[^0-9]/g, '');
     if (rawInr) {
       if (!el.getAttribute('data-inr')) el.setAttribute('data-inr', rawInr);
       const val = parseFloat(rawInr);
