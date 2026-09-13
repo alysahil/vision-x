@@ -1,7 +1,66 @@
 /* ==========================================================================
-   BULLETPROOF GLOBAL 3-DOT DRAWER & CURRENCY ENGINE (TOP SCOPE)
+   BULLETPROOF GLOBAL CURRENCY & DRAWER ENGINE (TOP LEVEL SCOPE)
    ========================================================================== */
+window.currencyRates = {
+  INR: { rate: 1.0, symbol: '₹', locale: 'en-IN' },
+  USD: { rate: 1 / 40, symbol: '$', locale: 'en-US' },
+  EUR: { rate: 1 / 45, symbol: '€', locale: 'de-DE' },
+  GBP: { rate: 1 / 52, symbol: '£', locale: 'en-GB' },
+  AED: { rate: 1 / 11, symbol: 'AED ', locale: 'ar-AE' }
+};
+
 window.activeCurrency = localStorage.getItem('activeCurrency') || 'INR';
+
+window.convertPrice = function(priceStr, currency) {
+  if (!priceStr) return priceStr;
+  const config = window.currencyRates[currency] || window.currencyRates.INR;
+  if (currency === 'INR') return priceStr;
+  return priceStr.replace(/₹([\d,]+)/g, (match, p1) => {
+    const inrVal = parseFloat(p1.replace(/,/g, ''));
+    const converted = Math.round(inrVal * config.rate);
+    return config.symbol + converted.toLocaleString(config.locale);
+  });
+};
+
+window.setGlobalCurrency = function(currency) {
+  if (!window.currencyRates[currency]) return;
+  window.activeCurrency = currency;
+  localStorage.setItem('activeCurrency', currency);
+
+  // Update active state on all currency buttons
+  document.querySelectorAll('.currency-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-currency') === currency);
+  });
+
+  // 1. Re-render dynamic service grids if present (services.html / category pages)
+  if (typeof renderServices === 'function') {
+    try { renderServices(); } catch(e) {}
+  }
+
+  // 2. Re-calculate ROI & Retainer calculators if present
+  if (typeof updateRetainerCalculator === 'function') {
+    try { updateRetainerCalculator(); } catch(e) {}
+  }
+  if (typeof updateInvoiceCalculator === 'function') {
+    try { updateInvoiceCalculator(); } catch(e) {}
+  }
+
+  // 3. Update all static convertible elements & price values instantly in real-time
+  const config = window.currencyRates[currency];
+  document.querySelectorAll('.price-val, .calc-out-val, .sub-price, .convertible-price, [data-inr-price], [data-inr]').forEach(el => {
+    const rawInr = el.getAttribute('data-inr') || el.getAttribute('data-inr-price') || el.textContent.replace(/[^0-9.]/g, '');
+    if (rawInr && !isNaN(parseFloat(rawInr))) {
+      if (!el.getAttribute('data-inr')) el.setAttribute('data-inr', rawInr);
+      const val = parseFloat(rawInr);
+      if (currency === 'INR') {
+        el.textContent = '₹' + Math.round(val).toLocaleString('en-IN');
+      } else {
+        const converted = Math.round(val * config.rate);
+        el.textContent = config.symbol + converted.toLocaleString(config.locale);
+      }
+    }
+  });
+};
 
 window.toggleThreeDotsDrawer = function(e) {
   if (e) {
@@ -39,7 +98,6 @@ window.toggleNavAccordion = function(headerEl) {
   if (!item) return;
   const isOpen = item.classList.contains('open');
   
-  // Close all accordion items and reset their body display & arrow rotation
   document.querySelectorAll('.nav-accordion-item').forEach(i => {
     i.classList.remove('open');
     const body = i.querySelector('.nav-accordion-body');
@@ -48,7 +106,6 @@ window.toggleNavAccordion = function(headerEl) {
     if (arrow) arrow.style.setProperty('transform', 'rotate(0deg)', 'important');
   });
 
-  // Expand target accordion item if it was closed
   if (!isOpen) {
     item.classList.add('open');
     const body = item.querySelector('.nav-accordion-body');
@@ -58,39 +115,10 @@ window.toggleNavAccordion = function(headerEl) {
   }
 };
 
-window.setGlobalCurrency = function(currency) {
-  const currencyRates = {
-    INR: { rate: 1.0, symbol: '₹', locale: 'en-IN' },
-    USD: { rate: 1 / 40, symbol: '$', locale: 'en-US' },
-    EUR: { rate: 1 / 45, symbol: '€', locale: 'de-DE' },
-    GBP: { rate: 1 / 52, symbol: '£', locale: 'en-GB' },
-    AED: { rate: 1 / 11, symbol: 'AED ', locale: 'ar-AE' }
-  };
-  if (!currencyRates[currency]) return;
-  window.activeCurrency = currency;
-  localStorage.setItem('activeCurrency', currency);
-
-  document.querySelectorAll('.currency-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-currency') === currency);
-  });
-
-  const config = currencyRates[currency];
-  document.querySelectorAll('.price-val, .calc-out-val, .sub-price, .convertible-price, [data-inr-price]').forEach(el => {
-    const rawInr = el.getAttribute('data-inr') || el.getAttribute('data-inr-price') || el.textContent.replace(/[^0-9]/g, '');
-    if (rawInr) {
-      if (!el.getAttribute('data-inr')) el.setAttribute('data-inr', rawInr);
-      const val = parseFloat(rawInr);
-      if (currency === 'INR') {
-        el.textContent = '₹' + Math.round(val).toLocaleString('en-IN');
-      } else {
-        const converted = Math.round(val * config.rate);
-        el.textContent = config.symbol + converted.toLocaleString(config.locale);
-      }
-    }
-  });
-};
-
 document.addEventListener('DOMContentLoaded', () => {
+  // Auto-sync initial currency state
+  window.setGlobalCurrency(window.activeCurrency);
+
 
     /* ==========================================================================
      MOTION API 60FPS SPRING ANIMATIONS, SCROLL PROGRESS & VIEWPORT REVEALS
@@ -295,27 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  window.setGlobalCurrency = function(currency) {
-    window.activeCurrency = currency;
-    localStorage.setItem('activeCurrency', currency);
-
-    document.querySelectorAll('.currency-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-currency') === currency);
-    });
-
-    if (typeof renderServices === 'function') {
-      try { renderServices(); } catch(e) {}
-    }
-
-    document.querySelectorAll('.convertible-price, [data-inr-price]').forEach(el => {
-      const orig = el.getAttribute('data-inr-price') || el.textContent;
-      if (!el.getAttribute('data-inr-price')) el.setAttribute('data-inr-price', orig);
-      el.textContent = convertPrice(orig, currency);
-    });
-
-    if (typeof updateRetainerCalculator === 'function') try { updateRetainerCalculator(); } catch(e) {}
-    if (typeof updateInvoiceCalculator === 'function') try { updateInvoiceCalculator(); } catch(e) {}
-  };
+  // (Primary window.setGlobalCurrency defined at top level)
 
   /* --- 2. Spotlight Hover Card Effect --- */
   const initSpotlightCard = (card) => {
@@ -2796,32 +2804,7 @@ window.activeCurrency = localStorage.getItem('activeCurrency') || 'INR';
 
 /* Using global currencyRates declared at top */
 
-window.setGlobalCurrency = function(currency) {
-  if (!currencyRates[currency]) return;
-  window.activeCurrency = currency;
-  localStorage.setItem('activeCurrency', currency);
-
-  // Update active state on all currency buttons
-  document.querySelectorAll('.currency-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-currency') === currency);
-  });
-
-  // Convert prices on current page
-  const config = currencyRates[currency];
-  document.querySelectorAll('.price-val, .calc-out-val, .sub-price').forEach(el => {
-    const rawInr = el.getAttribute('data-inr') || el.textContent.replace(/[^0-9]/g, '');
-    if (rawInr) {
-      if (!el.getAttribute('data-inr')) el.setAttribute('data-inr', rawInr);
-      const val = parseFloat(rawInr);
-      if (currency === 'INR') {
-        el.textContent = '₹' + Math.round(val).toLocaleString('en-IN');
-      } else {
-        const converted = Math.round(val * config.rate);
-        el.textContent = config.symbol + converted.toLocaleString(config.locale);
-      }
-    }
-  });
-};
+// (Primary window.setGlobalCurrency defined at top level)
 
 const initThreeDotsDrawer = () => {
   const toggleBtn = document.getElementById('three-dots-toggle');
