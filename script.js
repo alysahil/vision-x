@@ -2120,10 +2120,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const animateResults = () => {
     const resultBars = document.querySelectorAll('.result-bar-fill');
     resultBars.forEach(bar => {
-      const height = bar.getAttribute('data-height');
-      bar.style.height = height;
+      const height = bar.getAttribute('data-height') || '70%';
+      bar.style.setProperty('height', height, 'important');
+      bar.style.setProperty('min-height', height, 'important');
     });
   };
+
+  // Run animateResults immediately on initialization & DOM load
+  setTimeout(animateResults, 100);
+  setTimeout(animateResults, 500);
 
   /* --- 7. Viewport Reveal Animations --- */
   const reveals = document.querySelectorAll('.reveal');
