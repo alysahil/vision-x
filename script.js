@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BULLETPROOF GLOBAL CURRENCY & DRAWER ENGINE (TOP LEVEL SCOPE)
+   BULLETPROOF GLOBAL CURRENCY & DRAWER ENGINE (SAFE TOP SCOPE)
    ========================================================================== */
 window.currencyRates = {
   INR: { rate: 1.0, symbol: '₹', locale: 'en-IN' },
@@ -51,12 +51,11 @@ window.setGlobalCurrency = function(currency) {
     try { window.updateInvoiceCalculator(); } catch(e) {}
   }
 
-  // 5. Update static price elements across the DOM instantly
+  // 5. Update static price elements safely (ONLY elements with explicit data-inr or data-inr-price)
   const config = window.currencyRates[currency];
-  document.querySelectorAll('.price-val, .calc-out-val, .sub-price, .convertible-price, [data-inr-price], [data-inr]').forEach(el => {
-    const rawInr = el.getAttribute('data-inr') || el.getAttribute('data-inr-price') || el.textContent.replace(/[^0-9.]/g, '');
+  document.querySelectorAll('[data-inr], [data-inr-price]').forEach(el => {
+    const rawInr = el.getAttribute('data-inr') || el.getAttribute('data-inr-price');
     if (rawInr && !isNaN(parseFloat(rawInr))) {
-      if (!el.getAttribute('data-inr')) el.setAttribute('data-inr', rawInr);
       const val = parseFloat(rawInr);
       if (currency === 'INR') {
         el.textContent = '₹' + Math.round(val).toLocaleString('en-IN');
@@ -116,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const motionLib = window.Motion || window.motion;
 
     // Trigger initial reveal for visible elements on page load
+    document.querySelectorAll('.reveal').forEach((el) => { el.classList.add('active'); });
     document.querySelectorAll('.reveal').forEach((el, idx) => {
       const rect = el.getBoundingClientRect();
       if (rect.top < window.innerHeight * 0.9) {

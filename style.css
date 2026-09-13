@@ -1704,10 +1704,10 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- Viewport Scroll Trigger Utility & Motion Animations --- */
 .reveal {
-  opacity: 0;
-  transform: translateY(35px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  visibility: visible !important;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .reveal.active {
