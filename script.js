@@ -13,8 +13,9 @@ window.activeCurrency = localStorage.getItem('activeCurrency') || 'INR';
 
 window.convertPrice = function(priceStr, currency) {
   if (!priceStr) return priceStr;
-  const config = window.currencyRates[currency] || window.currencyRates.INR;
-  if (currency === 'INR') return priceStr;
+  const curr = currency || window.activeCurrency || 'INR';
+  const config = window.currencyRates[curr] || window.currencyRates.INR;
+  if (curr === 'INR') return priceStr;
   return priceStr.replace(/₹([\d,]+)/g, (match, p1) => {
     const inrVal = parseFloat(p1.replace(/,/g, ''));
     const converted = Math.round(inrVal * config.rate);
@@ -27,30 +28,30 @@ window.setGlobalCurrency = function(currency) {
   window.activeCurrency = currency;
   localStorage.setItem('activeCurrency', currency);
 
-  // Update active state on all currency buttons
+  // 1. Update active state on currency buttons across header and drawer
   document.querySelectorAll('.currency-btn').forEach(btn => {
     btn.classList.toggle('active', btn.getAttribute('data-currency') === currency);
   });
 
-  // Sync select dropdowns in header
+  // 2. Sync all header currency select dropdowns
   document.querySelectorAll('.header-currency-select').forEach(select => {
     select.value = currency;
   });
 
-  // 1. Re-render dynamic service grids if present (services.html / category pages)
-  if (typeof renderServices === 'function') {
-    try { renderServices(); } catch(e) {}
+  // 3. Re-render dynamic service grids if present (services.html / category pages)
+  if (typeof window.renderServices === 'function') {
+    try { window.renderServices(); } catch(e) {}
   }
 
-  // 2. Re-calculate ROI & Retainer calculators if present
-  if (typeof updateRetainerCalculator === 'function') {
-    try { updateRetainerCalculator(); } catch(e) {}
+  // 4. Re-calculate ROI & Retainer calculators if present
+  if (typeof window.updateRetainerCalculator === 'function') {
+    try { window.updateRetainerCalculator(); } catch(e) {}
   }
-  if (typeof updateInvoiceCalculator === 'function') {
-    try { updateInvoiceCalculator(); } catch(e) {}
+  if (typeof window.updateInvoiceCalculator === 'function') {
+    try { window.updateInvoiceCalculator(); } catch(e) {}
   }
 
-  // 3. Update all static convertible elements & price values instantly in real-time
+  // 5. Update static price elements across the DOM instantly
   const config = window.currencyRates[currency];
   document.querySelectorAll('.price-val, .calc-out-val, .sub-price, .convertible-price, [data-inr-price], [data-inr]').forEach(el => {
     const rawInr = el.getAttribute('data-inr') || el.getAttribute('data-inr-price') || el.textContent.replace(/[^0-9.]/g, '');
@@ -67,60 +68,28 @@ window.setGlobalCurrency = function(currency) {
   });
 };
 
-window.toggleThreeDotsDrawer = function(e) {
-  if (e) {
-    if (typeof e.stopPropagation === 'function') e.stopPropagation();
-    if (typeof e.preventDefault === 'function') e.preventDefault();
-  }
-  const drawer = document.getElementById('three-dots-drawer');
-  if (drawer) {
-    const isCurrentlyOpen = drawer.classList.contains('open') || drawer.style.right === '0px';
-    if (isCurrentlyOpen) {
-      drawer.classList.remove('open');
-      drawer.style.setProperty('right', '-420px', 'important');
-    } else {
-      drawer.classList.add('open');
-      drawer.style.setProperty('right', '0px', 'important');
-    }
-  }
-};
-
-window.closeThreeDotsDrawer = function(e) {
-  if (e) {
-    if (typeof e.stopPropagation === 'function') e.stopPropagation();
-    if (typeof e.preventDefault === 'function') e.preventDefault();
-  }
-  const drawer = document.getElementById('three-dots-drawer');
-  if (drawer) {
-    drawer.classList.remove('open');
-    drawer.style.setProperty('right', '-420px', 'important');
-  }
-};
-
-window.toggleNavAccordion = function(headerEl) {
-  if (!headerEl) return;
-  const item = headerEl.closest('.nav-accordion-item');
-  if (!item) return;
-  const isOpen = item.classList.contains('open');
+document.addEventListener('DOMContentLoaded', () => {
   
-  document.querySelectorAll('.nav-accordion-item').forEach(i => {
-    i.classList.remove('open');
-    const body = i.querySelector('.nav-accordion-body');
-    if (body) body.style.setProperty('display', 'none', 'important');
-    const arrow = i.querySelector('.nav-accordion-arrow');
-    if (arrow) arrow.style.setProperty('transform', 'rotate(0deg)', 'important');
+  // Register functions on window object for instant real-time currency switching
+  if (typeof renderServices === 'function') window.renderServices = renderServices;
+  if (typeof updateRetainerCalculator === 'function') window.updateRetainerCalculator = updateRetainerCalculator;
+  if (typeof updateInvoiceCalculator === 'function') window.updateInvoiceCalculator = updateInvoiceCalculator;
+
+  
+  // Global Event Listeners for Currency Elements
+  document.querySelectorAll('.header-currency-select').forEach(select => {
+    select.addEventListener('change', (e) => {
+      window.setGlobalCurrency(e.target.value);
+    });
   });
 
-  if (!isOpen) {
-    item.classList.add('open');
-    const body = item.querySelector('.nav-accordion-body');
-    if (body) body.style.setProperty('display', 'flex', 'important');
-    const arrow = item.querySelector('.nav-accordion-arrow');
-    if (arrow) arrow.style.setProperty('transform', 'rotate(180deg)', 'important');
-  }
-};
+  document.querySelectorAll('.currency-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const curr = btn.getAttribute('data-currency');
+      if (curr) window.setGlobalCurrency(curr);
+    });
+  });
 
-document.addEventListener('DOMContentLoaded', () => {
   // Auto-sync initial currency state
   window.setGlobalCurrency(window.activeCurrency);
   document.querySelectorAll('.header-currency-select').forEach(s => s.value = window.activeCurrency);
