@@ -3395,3 +3395,97 @@ html, body {
     display: inline-flex !important;
   }
 }
+
+/* ==========================================================================
+   HEADER CURRENCY CONVERTER (MOBILE & DESKTOP) & DESKTOP ACCORDION HIGHLIGHTS
+   ========================================================================== */
+
+.header-currency-wrapper {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: rgba(201, 162, 39, 0.12) !important;
+  border: 1px solid rgba(201, 162, 39, 0.4) !important;
+  border-radius: 20px !important;
+  padding: 4px 10px !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+  margin-right: 6px !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+}
+
+.header-currency-wrapper:hover {
+  background: rgba(201, 162, 39, 0.22) !important;
+  border-color: #eccb6c !important;
+  box-shadow: 0 0 14px rgba(201, 162, 39, 0.3) !important;
+  transform: translateY(-1px) !important;
+}
+
+.header-currency-icon {
+  color: #eccb6c !important;
+  font-size: 12px !important;
+}
+
+.header-currency-select {
+  background: transparent !important;
+  color: #eccb6c !important;
+  border: none !important;
+  font-family: var(--font-headings), 'Space Grotesk', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  outline: none !important;
+  padding-right: 2px !important;
+  appearance: auto !important;
+  -webkit-appearance: auto !important;
+}
+
+.header-currency-select option {
+  background: #0b0b12 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
+/* Desktop Accordion Highlighting (min-width: 769px) */
+@media (min-width: 769px) {
+  .accordion-card,
+  .spotlight-card.accordion-card {
+    border: 1px solid rgba(201, 162, 39, 0.35) !important;
+    background: linear-gradient(145deg, rgba(201, 162, 39, 0.08) 0%, rgba(15, 15, 26, 0.9) 100%) !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .accordion-card:hover,
+  .accordion-card.active,
+  .spotlight-card.accordion-card:hover {
+    border-color: #eccb6c !important;
+    box-shadow: 0 12px 35px rgba(201, 162, 39, 0.25), 0 0 25px rgba(201, 162, 39, 0.2) !important;
+    transform: translateY(-4px) scale(1.01) !important;
+  }
+
+  .accordion-card .service-title {
+    color: #eccb6c !important;
+    font-weight: 700 !important;
+  }
+
+  .accordion-card .accordion-toggle-icon {
+    display: flex !important;
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 50% !important;
+    background: rgba(201, 162, 39, 0.18) !important;
+    border: 1px solid rgba(201, 162, 39, 0.4) !important;
+    color: #eccb6c !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+.nav-accordion-item.open {
+  border-color: #eccb6c !important;
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.15) 0%, rgba(15, 15, 24, 0.95) 100%) !important;
+  box-shadow: 0 8px 24px rgba(201, 162, 39, 0.25) !important;
+}

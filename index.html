@@ -16,7 +16,7 @@
   <meta property="og:type" content="website">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="style.css?v=27.0">
+  <link rel="stylesheet" href="style.css?v=28.0">
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -79,6 +79,18 @@
       </nav>
 
       <div class="nav-actions">
+        <!-- Header Currency Converter Selector (Mobile & Desktop) -->
+        <div class="header-currency-wrapper" title="Change Currency">
+          <i class="fa-solid fa-coins header-currency-icon"></i>
+          <select class="header-currency-select" onchange="window.setGlobalCurrency(this.value)" aria-label="Select Currency">
+            <option value="INR">INR (₹)</option>
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="AED">AED (د.إ)</option>
+          </select>
+        </div>
+
         <!-- 3-Dot Options Drawer Toggle -->
         <button class="three-dots-btn" id="three-dots-toggle" onclick="window.toggleThreeDotsDrawer(event)" aria-label="Open Navigation Options" title="Menu Options">
           <i class="fa-solid fa-ellipsis-vertical"></i>

@@ -32,6 +32,11 @@ window.setGlobalCurrency = function(currency) {
     btn.classList.toggle('active', btn.getAttribute('data-currency') === currency);
   });
 
+  // Sync select dropdowns in header
+  document.querySelectorAll('.header-currency-select').forEach(select => {
+    select.value = currency;
+  });
+
   // 1. Re-render dynamic service grids if present (services.html / category pages)
   if (typeof renderServices === 'function') {
     try { renderServices(); } catch(e) {}
@@ -118,6 +123,7 @@ window.toggleNavAccordion = function(headerEl) {
 document.addEventListener('DOMContentLoaded', () => {
   // Auto-sync initial currency state
   window.setGlobalCurrency(window.activeCurrency);
+  document.querySelectorAll('.header-currency-select').forEach(s => s.value = window.activeCurrency);
 
 
     /* ==========================================================================
