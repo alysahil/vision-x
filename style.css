@@ -3559,3 +3559,30 @@ html, body {
   text-transform: uppercase !important;
   letter-spacing: 0.05em !important;
 }
+
+
+/* ==========================================================================
+   TOUCH & MOBILE VIEW NAVIGATION ENHANCEMENTS
+   ========================================================================== */
+.three-dots-btn,
+.menu-close-btn,
+.menu-item,
+.btn,
+.header-currency-wrapper,
+.header-currency-select,
+.accordion-card,
+.spotlight-card,
+.nav-link {
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: transparent !important;
+  cursor: pointer !important;
+}
+
+@media (max-width: 1024px) {
+  #three-dots-toggle {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 1000 !important;
+  }
+}

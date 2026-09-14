@@ -2716,37 +2716,32 @@ document.addEventListener('DOMContentLoaded', () => {
      UNIFIED MOBILE CARD ACCORDION & DRAWER ACCORDION ENGINE
      ========================================================================== */
   const initAllAccordions = () => {
-    // 1. Mobile Service Card Accordion Toggle
-    const cards = document.querySelectorAll('.accordion-card, .spotlight-card');
+    // 1. Category Card Navigation & Accordion Engine (Clean Mobile & Desktop)
+    const categoryCards = document.querySelectorAll('.accordion-card');
     
-    // Auto-expand 1st card on mobile for visual guide
-    if (window.innerWidth <= 768 && cards.length > 0) {
-      cards[0].classList.add('active', 'mobile-expanded');
-    }
-
-    cards.forEach(card => {
+    categoryCards.forEach(card => {
       card.addEventListener('click', (e) => {
-        // If user explicitly clicked the subpage link button inside the body, allow navigation
-        if (e.target.tagName === 'A' || e.target.closest('a') || e.target.classList.contains('btn') || e.target.closest('.btn')) {
-          const btnLink = e.target.tagName === 'A' ? e.target : e.target.closest('a');
-          if (btnLink && btnLink.getAttribute('href')) {
-            window.location.href = btnLink.getAttribute('href');
-          }
+        const linkBtn = card.querySelector('a[href]');
+        const clickedLink = e.target.closest('a');
+        
+        // If clicking a direct link or link button, navigate immediately
+        if (clickedLink && clickedLink.getAttribute('href')) {
+          window.location.href = clickedLink.getAttribute('href');
+          return;
+        }
+        
+        // If card has an embedded subpage link, navigate to it on tap
+        if (linkBtn && linkBtn.getAttribute('href')) {
+          window.location.href = linkBtn.getAttribute('href');
           return;
         }
 
-        // On mobile viewports (<= 768px), toggle expand/collapse state
+        // Otherwise, toggle accordion expand state if content body is present
         if (window.innerWidth <= 768) {
           const isCurrentlyActive = card.classList.contains('active') || card.classList.contains('mobile-expanded');
-
-          // Close other cards for clean single-accordion behavior
-          cards.forEach(c => {
-            if (c !== card) {
-              c.classList.remove('active', 'mobile-expanded');
-            }
+          categoryCards.forEach(c => {
+            if (c !== card) c.classList.remove('active', 'mobile-expanded');
           });
-
-          // Toggle current card
           card.classList.toggle('active', !isCurrentlyActive);
           card.classList.toggle('mobile-expanded', !isCurrentlyActive);
         }
@@ -2807,6 +2802,17 @@ const initThreeDotsDrawer = () => {
       e.stopPropagation();
       e.preventDefault();
       drawer.classList.remove('open');
+      drawer.style.setProperty('right', '-420px', 'important');
+    });
+  }
+
+  // Auto-close drawer when tapping any navigation link inside
+  if (drawer) {
+    drawer.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        drawer.style.setProperty('right', '-420px', 'important');
+      });
     });
   }
 
