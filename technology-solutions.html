@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <title>Technology Solutions — Kinetic Growth Capabilities</title>
   <meta name="description" content="Scalable business automation pipelines, cloud architecture management, transformation plans, and strategic IT audits.">
-  <link rel="stylesheet" href="style.css?v=31.0">
+  <link rel="stylesheet" href="style.css?v=32.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" type="image/png" href="assets/logo-icon.png">
 <style>
@@ -161,7 +161,7 @@
     <a href="index.html#why-us" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Why Us</a>
     <a href="index.html#testimonials" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Testimonials</a>
     <a href="index.html#pricing" class="nav-link drawer-link" style="font-size: 18px; padding: 12px;">Pricing</a>
-    <div style="padding: 12px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); margin: 10px 0;"><div class="currency-switch" style="width: 100%; display: flex; justify-content: space-around;"><button class="currency-btn active" data-currency="INR" onclick="setGlobalCurrency(\'INR\')" style="flex:1;">INR (₹)</button><button class="currency-btn" data-currency="USD" onclick="setGlobalCurrency(\'USD\')" style="flex:1;">USD ($)</button></div></div><a href="index.html#contact" class="btn btn-primary" style="margin-top: 10px;">Start a Project</a></div>
+    <div style="padding: 12px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); margin: 10px 0;"><div class="currency-switch" style="width: 100%; display: flex; justify-content: space-around;"><button class="currency-btn active" data-currency="INR" onclick="window.setGlobalCurrency('INR')" style="flex:1;">INR (₹)</button><button class="currency-btn" data-currency="USD" onclick="window.setGlobalCurrency('USD')" style="flex:1;">USD ($)</button></div></div><a href="index.html#contact" class="btn btn-primary" style="margin-top: 10px;">Start a Project</a></div>
 
   <main style="padding-top: 140px; min-height: 80vh;">
     <section class="section" style="padding-top: 0;">
@@ -194,7 +194,7 @@
           </a>
         </div>
 
-        <div class="card-grid" id="services-grid-container">
+        <div class="card-grid" id="services-grid-container" data-category="tech">
           <!-- Dynamically populated via JS -->
         </div>
       </div>

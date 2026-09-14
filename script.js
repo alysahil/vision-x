@@ -1309,21 +1309,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('services-search');
   const categoryFilters = document.querySelectorAll('#services-categories-container .filter-btn');
 
-  // Parse page category from pathname
+  // Parse page category from data-category attribute or pathname
   let activeCategory = 'all';
-  const pagePath = window.location.pathname.toLowerCase();
-  
-  if (pagePath.includes('ai-solutions')) activeCategory = 'ai';
-  else if (pagePath.includes('video-production')) activeCategory = 'video';
-  else if (pagePath.includes('graphic-design')) activeCategory = 'design';
-  else if (pagePath.includes('photo-services')) activeCategory = 'photo';
-  else if (pagePath.includes('digital-marketing')) activeCategory = 'marketing';
-  else if (pagePath.includes('social-media-management')) activeCategory = 'smm';
-  else if (pagePath.includes('web-app-development')) activeCategory = 'dev';
-  else if (pagePath.includes('ui-ux-design')) activeCategory = 'uiux';
-  else if (pagePath.includes('software-coding-solutions')) activeCategory = 'software';
-  else if (pagePath.includes('technology-solutions')) activeCategory = 'tech';
-  else if (pagePath.includes('additional-services')) activeCategory = 'additional';
+  if (gridContainer && gridContainer.getAttribute('data-category')) {
+    activeCategory = gridContainer.getAttribute('data-category');
+  } else {
+    const pagePath = window.location.pathname.toLowerCase();
+    if (pagePath.includes('ai-solutions')) activeCategory = 'ai';
+    else if (pagePath.includes('video-production')) activeCategory = 'video';
+    else if (pagePath.includes('graphic-design')) activeCategory = 'design';
+    else if (pagePath.includes('photo-services')) activeCategory = 'photo';
+    else if (pagePath.includes('digital-marketing')) activeCategory = 'marketing';
+    else if (pagePath.includes('social-media-management')) activeCategory = 'smm';
+    else if (pagePath.includes('web-app-development')) activeCategory = 'dev';
+    else if (pagePath.includes('ui-ux-design')) activeCategory = 'uiux';
+    else if (pagePath.includes('software-coding-solutions')) activeCategory = 'software';
+    else if (pagePath.includes('technology-solutions')) activeCategory = 'tech';
+    else if (pagePath.includes('additional-services')) activeCategory = 'additional';
+  }
 
   // Highlight active category nav filter if present
   if (categoryFilters.length > 0) {
