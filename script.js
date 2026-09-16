@@ -67,6 +67,63 @@ window.setGlobalCurrency = function(currency) {
   });
 };
 
+/* ==========================================================================
+   GLOBAL ONCLICK HANDLERS — must be on window so HTML onclick="" attrs work
+   ========================================================================== */
+
+// 3-Dot Drawer Toggle (used in header button onclick)
+window.toggleThreeDotsDrawer = function(e) {
+  if (e) { e.stopPropagation(); e.preventDefault(); }
+  const drawer = document.getElementById('three-dots-drawer');
+  if (!drawer) return;
+  const isOpen = drawer.classList.contains('open');
+  if (isOpen) {
+    drawer.classList.remove('open');
+    drawer.style.setProperty('right', '-420px', 'important');
+  } else {
+    drawer.classList.add('open');
+    drawer.style.setProperty('right', '0', 'important');
+  }
+};
+
+// Close Drawer (used in X button onclick)
+window.closeThreeDotsDrawer = function(e) {
+  if (e) { e.stopPropagation(); e.preventDefault(); }
+  const drawer = document.getElementById('three-dots-drawer');
+  if (!drawer) return;
+  drawer.classList.remove('open');
+  drawer.style.setProperty('right', '-420px', 'important');
+};
+
+// Nav Accordion Toggle (used in nav-accordion-header onclick)
+window.toggleNavAccordion = function(headerEl) {
+  const item = headerEl ? headerEl.closest('.nav-accordion-item') : null;
+  if (!item) return;
+  const isOpen = item.classList.contains('open');
+  // Close all other items
+  document.querySelectorAll('.nav-accordion-item').forEach(i => {
+    if (i !== item) {
+      i.classList.remove('open');
+      const body = i.querySelector('.nav-accordion-body');
+      const arrow = i.querySelector('.nav-accordion-arrow');
+      if (body) body.style.display = 'none';
+      if (arrow) arrow.style.transform = '';
+    }
+  });
+  // Toggle this item
+  const body = item.querySelector('.nav-accordion-body');
+  const arrow = item.querySelector('.nav-accordion-arrow');
+  if (isOpen) {
+    item.classList.remove('open');
+    if (body) body.style.display = 'none';
+    if (arrow) arrow.style.transform = '';
+  } else {
+    item.classList.add('open');
+    if (body) body.style.display = 'flex';
+    if (arrow) arrow.style.transform = 'rotate(180deg)';
+  }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   
   // Register functions on window object for instant real-time currency switching
