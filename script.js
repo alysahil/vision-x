@@ -2716,55 +2716,38 @@ document.addEventListener('DOMContentLoaded', () => {
      UNIFIED MOBILE CARD ACCORDION & DRAWER ACCORDION ENGINE
      ========================================================================== */
   const initAllAccordions = () => {
-    // 1. Category Card Navigation & Accordion Engine (Mobile: expand first, navigate second)
+    // 1. Category Card Navigation - Navigate immediately on tap if card has a subpage link
     const categoryCards = document.querySelectorAll('.accordion-card');
 
     categoryCards.forEach(card => {
       card.addEventListener('click', (e) => {
-        const clickedLink = e.target.closest('a');
+        // Don't interfere if clicking a button/input inside the card
+        if (e.target.closest('button') && !e.target.closest('.accordion-toggle-icon')) return;
 
-        // If user directly tapped a visible <a> link, let browser navigate naturally
-        if (clickedLink && clickedLink.getAttribute('href') && clickedLink.getAttribute('href') !== '#') {
-          return; // allow default anchor navigation
-        }
+        // Find the subpage link inside this card
+        const subpageLink = card.querySelector('.accordion-content-body a[href]');
+        const hasSubpage = subpageLink && subpageLink.getAttribute('href') && subpageLink.getAttribute('href') !== '#';
 
-        // On mobile/tablet: toggle expand first, navigate on second tap
-        if (window.innerWidth <= 1024) {
+        if (hasSubpage) {
+          // Card has a destination page — navigate immediately on ANY tap (mobile or desktop)
           e.preventDefault();
           e.stopPropagation();
-
-          const isCurrentlyActive = card.classList.contains('active') || card.classList.contains('mobile-expanded');
-
-          // If already expanded, navigate to the subpage (second tap)
-          if (isCurrentlyActive) {
-            const linkBtn = card.querySelector('.accordion-content-body a[href]');
-            if (linkBtn && linkBtn.getAttribute('href') && linkBtn.getAttribute('href') !== '#') {
-              window.location.href = linkBtn.getAttribute('href');
-              return;
-            }
-          }
-
-          // Collapse all other cards
-          categoryCards.forEach(c => {
-            if (c !== card) {
-              c.classList.remove('active', 'mobile-expanded');
-              c.setAttribute('aria-expanded', 'false');
-            }
-          });
-
-          // Toggle this card open
-          const nowActive = !isCurrentlyActive;
-          card.classList.toggle('active', nowActive);
-          card.classList.toggle('mobile-expanded', nowActive);
-          card.setAttribute('aria-expanded', String(nowActive));
+          window.location.href = subpageLink.getAttribute('href');
           return;
         }
 
-        // Desktop: if card has a subpage link, navigate on click
-        const linkBtn = card.querySelector('.accordion-content-body a[href]');
-        if (linkBtn && linkBtn.getAttribute('href') && linkBtn.getAttribute('href') !== '#') {
-          window.location.href = linkBtn.getAttribute('href');
-        }
+        // No subpage link — treat as a pure accordion toggle
+        const isCurrentlyActive = card.classList.contains('active') || card.classList.contains('mobile-expanded');
+        categoryCards.forEach(c => {
+          if (c !== card) {
+            c.classList.remove('active', 'mobile-expanded');
+            c.setAttribute('aria-expanded', 'false');
+          }
+        });
+        const nowActive = !isCurrentlyActive;
+        card.classList.toggle('active', nowActive);
+        card.classList.toggle('mobile-expanded', nowActive);
+        card.setAttribute('aria-expanded', String(nowActive));
       });
     });
 
