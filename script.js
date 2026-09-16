@@ -126,12 +126,6 @@ window.toggleNavAccordion = function(headerEl) {
 
 document.addEventListener('DOMContentLoaded', () => {
   
-  // Register functions on window object for instant real-time currency switching
-  if (typeof renderServices === 'function') window.renderServices = renderServices;
-  if (typeof updateRetainerCalculator === 'function') window.updateRetainerCalculator = updateRetainerCalculator;
-  if (typeof updateInvoiceCalculator === 'function') window.updateInvoiceCalculator = updateInvoiceCalculator;
-
-  
   // Global Event Listeners for Currency Elements
   document.querySelectorAll('.header-currency-select').forEach(select => {
     select.addEventListener('change', (e) => {
@@ -200,7 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Viewport Reveal InView
       if (motionLib.inView) {
-        motionLib.inView('.reveal, .why-card, .testimonial-card, .pricing-card, .section-header', ({ target }) => {
+        motionLib.inView('.reveal, .why-card, .testimonial-card, .pricing-card, .section-header', (entry) => {
+          const target = entry && (entry.target || entry);
+          if (!target || !target.classList) return;
           target.classList.add('active');
           try {
             motionLib.animate(
@@ -2097,6 +2093,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  window.renderServices = renderServices;
+
   const toggleServiceSelection = (index) => {
     if (selectedServices.has(index)) {
       selectedServices.delete(index);
@@ -2314,6 +2312,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  window.updateRetainerCalculator = updateRetainerCalculator;
+
   const updateInvoiceCalculator = () => {
     if (!invoiceItemsList || calculatorMode !== 'invoice') return;
 
@@ -2395,6 +2395,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   };
+
+  window.updateInvoiceCalculator = updateInvoiceCalculator;
 
   window.removeInvoiceItem = (index) => {
     toggleServiceSelection(index);
