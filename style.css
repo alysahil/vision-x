@@ -3586,3 +3586,46 @@ html, body {
     z-index: 1000 !important;
   }
 }
+
+
+/* ==========================================================================
+   PIXEL-PERFECT MOBILE HEADER & NAV ACTIONS SPACING (DOWN TO 320px)
+   ========================================================================== */
+@media (max-width: 640px) {
+  .nav-container {
+    padding: 0 12px !important;
+  }
+  .logo {
+    font-size: 16px !important;
+    gap: 6px !important;
+  }
+  .logo-img {
+    height: 26px !important;
+  }
+  .nav-actions {
+    gap: 4px !important;
+  }
+  .header-currency-wrapper {
+    padding: 3px 6px !important;
+    margin-right: 2px !important;
+  }
+  .header-currency-select {
+    font-size: 11px !important;
+  }
+  .three-dots-btn {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 14px !important;
+  }
+  .nav-actions .btn-sm {
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .nav-actions .btn-sm {
+    display: none !important; /* Hide CTA button on ultra-small screens to preserve header layout */
+  }
+}
