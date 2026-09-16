@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Viewport Reveal InView
       if (motionLib.inView) {
-        motionLib.inView('.reveal, .spotlight-card, .why-card, .testimonial-card, .pricing-card, .section-header', ({ target }) => {
+        motionLib.inView('.reveal, .why-card, .testimonial-card, .pricing-card, .section-header', ({ target }) => {
           target.classList.add('active');
           try {
             motionLib.animate(
