@@ -2716,34 +2716,54 @@ document.addEventListener('DOMContentLoaded', () => {
      UNIFIED MOBILE CARD ACCORDION & DRAWER ACCORDION ENGINE
      ========================================================================== */
   const initAllAccordions = () => {
-    // 1. Category Card Navigation & Accordion Engine (Clean Mobile & Desktop)
+    // 1. Category Card Navigation & Accordion Engine (Mobile: expand first, navigate second)
     const categoryCards = document.querySelectorAll('.accordion-card');
-    
+
     categoryCards.forEach(card => {
       card.addEventListener('click', (e) => {
-        const linkBtn = card.querySelector('a[href]');
         const clickedLink = e.target.closest('a');
-        
-        // If clicking a direct link or link button, navigate immediately
-        if (clickedLink && clickedLink.getAttribute('href')) {
-          window.location.href = clickedLink.getAttribute('href');
-          return;
+
+        // If user directly tapped a visible <a> link, let browser navigate naturally
+        if (clickedLink && clickedLink.getAttribute('href') && clickedLink.getAttribute('href') !== '#') {
+          return; // allow default anchor navigation
         }
-        
-        // If card has an embedded subpage link, navigate to it on tap
-        if (linkBtn && linkBtn.getAttribute('href')) {
-          window.location.href = linkBtn.getAttribute('href');
+
+        // On mobile/tablet: toggle expand first, navigate on second tap
+        if (window.innerWidth <= 1024) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const isCurrentlyActive = card.classList.contains('active') || card.classList.contains('mobile-expanded');
+
+          // If already expanded, navigate to the subpage (second tap)
+          if (isCurrentlyActive) {
+            const linkBtn = card.querySelector('.accordion-content-body a[href]');
+            if (linkBtn && linkBtn.getAttribute('href') && linkBtn.getAttribute('href') !== '#') {
+              window.location.href = linkBtn.getAttribute('href');
+              return;
+            }
+          }
+
+          // Collapse all other cards
+          categoryCards.forEach(c => {
+            if (c !== card) {
+              c.classList.remove('active', 'mobile-expanded');
+              c.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          // Toggle this card open
+          const nowActive = !isCurrentlyActive;
+          card.classList.toggle('active', nowActive);
+          card.classList.toggle('mobile-expanded', nowActive);
+          card.setAttribute('aria-expanded', String(nowActive));
           return;
         }
 
-        // Otherwise, toggle accordion expand state if content body is present
-        if (window.innerWidth <= 768) {
-          const isCurrentlyActive = card.classList.contains('active') || card.classList.contains('mobile-expanded');
-          categoryCards.forEach(c => {
-            if (c !== card) c.classList.remove('active', 'mobile-expanded');
-          });
-          card.classList.toggle('active', !isCurrentlyActive);
-          card.classList.toggle('mobile-expanded', !isCurrentlyActive);
+        // Desktop: if card has a subpage link, navigate on click
+        const linkBtn = card.querySelector('.accordion-content-body a[href]');
+        if (linkBtn && linkBtn.getAttribute('href') && linkBtn.getAttribute('href') !== '#') {
+          window.location.href = linkBtn.getAttribute('href');
         }
       });
     });
